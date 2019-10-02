@@ -1,0 +1,24 @@
+html,body,h1 {
+  margin: 0;
+  padding: 0;
+}
+
+.admin_login_div {
+  margin: 300px auto;
+  width: 400px;
+}
+
+.admin_login_div div, .admin_login_div label {
+  padding: 10px;
+}
+
+.admin_login_div label {
+  font-weight: bold;
+  width: 20px;
+}
+
+.admin_login_div input {
+  width: 200px;
+  height: 20px;
+  display: block;
+}
