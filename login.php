@@ -59,6 +59,9 @@
               <div class="form-group">
                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Login">
               </div>
+              <div>
+                  <p><a href="forgetpassword.php">Forget Password</a></p>
+              </div>
             </form>
           </div>
 
