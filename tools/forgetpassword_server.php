@@ -3,6 +3,7 @@
   include_once 'InputValidation.php';
   include_once('db_connect.php');
   include_once 'sendemail.php';
+  $firstName = "";
   $email = "";
   $errors = InputValidation::$errors;    
   // Registering users
@@ -14,10 +15,10 @@
       $email = mysqli_real_escape_string($db, preg_replace('/\s+/', '', $_POST['email']));
       
       //Checking whehter the email address has been registered
-      $email_check_query = "SELECT userid FROM Users WHERE email = '$email' LIMIT 1";       
+      $email_check_query = "SELECT userid, firstName FROM Users WHERE email = '$email' LIMIT 1";       
       $result = mysqli_query($db, $email_check_query);        
-      $email_exists_check = mysqli_fetch_assoc($result);     
-      if (!$email_exists_check) {
+      $row = mysqli_fetch_assoc($result);     
+      if (!$row) {
           array_push($errors, "Email not registered");
       }
       
@@ -25,11 +26,10 @@
       if (count($errors) == 0) {
             $forgetpassword_hash = md5 (rand(0,1000)); // Generate a random 32 character hash
 
-            $query = "SELECT userid FROM Users WHERE email = '$email' LIMIT 1";
-            $result = mysqli_query($db, $email_check_query); 
-            $row = mysqli_fetch_row($result);
-            $firstName = $row[0];
             
+            $firstName = $row['firstName'];
+            print "first name ";
+            print $firstName;
           
           
             $subject = "Car Buddy - Reset Your Password";
@@ -46,7 +46,7 @@
             Car Buddy Team
             ';
             sendEmail($subject, $emailMessage, $email);
-            header("Location: ./forgetpassword_success_landing.php");
+            //header("Location: ./forgetpassword_success_landing.php");
           
       }
   }
