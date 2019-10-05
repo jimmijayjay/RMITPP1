@@ -7,22 +7,17 @@
  */
 
 class InputValidation {
-    static $errors = array(); 
     
     static function email($val){
         $val = filter_var($val, FILTER_VALIDATE_EMAIL);
         if ($val === FALSE){
-            self::throwError("Invalid Email", 903);
-            array_push($errors, "Email not valid");
+            return [False, "Email is not valid"];        
+        }elseif(strlen($val   ) > 100){
+            return [False, "Email exceeds length limit"];
         }else{
-          if (strlen($email) > 100) {
-          array_push($errors, "Email is too long");
-      }
-        }
-         
-        return $val;
+            return [True, ""];
+        }   
     }
     
-    
-}
+ }
 
