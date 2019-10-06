@@ -1,4 +1,4 @@
 /nbproject
 /tools/UnitTest/Vendor
-/tools/Vendor
-/tools/composer.lock
+/tools/vendor
+composer.lock
