@@ -40,18 +40,18 @@
           <div class="col-md pl-md-5 pl-0 probootstrap-image-grid">
             <div class="row">
               <div class="col-md-6">
-                <a class="probootstrap-img-item" href="#"><span class="icon icon-plus"></span><div style="background-image: url(images/mazdaCX-5.jpg);"></div></a>
+                <a class="probootstrap-img-item" href="findCars.php"><span class="icon icon-plus"></span><div style="background-image: url(images/mazdaCX-5.jpg);"></div></a>
               </div>
               <div class="col-md-6">
-                <a class="probootstrap-img-item" href="#"><span class="icon icon-plus"></span><div style="background-image: url(images/fordRanger.jpg);"></div></a>
+                <a class="probootstrap-img-item" href="findCars.php"><span class="icon icon-plus"></span><div style="background-image: url(images/fordRanger.jpg);"></div></a>
               </div>
             </div>
             <div class="row">
               <div class="col-md-6">
-                <a class="probootstrap-img-item" href="#"><span class="icon icon-plus"></span><div style="background-image: url(images/toyotaHiAce.jpg);"></div></a>
+                <a class="probootstrap-img-item" href="findCars.php"><span class="icon icon-plus"></span><div style="background-image: url(images/toyotaHiAce.jpg);"></div></a>
               </div>
               <div class="col-md-6">
-                <a class="probootstrap-img-item" href="#"><span class="icon icon-plus"></span><div style="background-image: url(images/hyundai_i30.jpg);"></div></a>
+                <a class="probootstrap-img-item" href="findCars.php"><span class="icon icon-plus"></span><div style="background-image: url(images/hyundai_i30.jpg);"></div></a>
               </div>
             </div>
           </div>
