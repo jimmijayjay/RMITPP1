@@ -9,7 +9,7 @@
             <ul class="navbar-nav ml-auto">
               <li class="nav-item"><a href="index.php" class="nav-link">Home</a></li>
               <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
-              <li class="nav-item"><a href="services.php" class="nav-link">Find Cars</a></li>
+              <li class="nav-item"><a href="findCars.php" class="nav-link">Find Cars</a></li>
               <li class="nav-item"><a href="services.php" class="nav-link">Make a Booking</a></li>
               <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
               <?php if($_SESSION["userid"]!=NULL){?>

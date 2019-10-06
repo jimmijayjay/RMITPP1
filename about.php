@@ -8,9 +8,9 @@
         <div class="row probootstrap-vh-75 align-items-center text-left">
           <div class="col-sm">
             <div class="probootstrap-text pt-5">
-              <h1 class="probootstrap-heading text-white mb-4">About Us </h1>
+              <h1 class="probootstrap-heading text-white mb-4">About Us</h1>
               <div class="probootstrap-subheading mb-5">
-                <p class="h4 font-weight-normal">Free Bootstrap 4 Under Creative Common License by <u>uicookies.com</u></p>
+                <p class="h4 font-weight-normal">Learn About Car Buddy below</u></p>
               </div>
             </div>
           </div>
@@ -23,16 +23,15 @@
         <div class="row">
           <div class="col-md-7 pr-md-5 pr-0">
             <h2 class="mb-5">Our Mission</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+            <p>Car Buddy is a web-based program that allows users to hire vehicles of their choice which are freely parked around the city.</p>
 
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
+            <p>Our aim is to provide users with travel around the city with the use of bookable vehicles which can then be used by customers around the city.</p>
 
+            <p>Once customer have booked a vehicle, they will have the ability to use that vehicle within the booked period and then return the vehicle to selected Car Buddy locations.</p>
 
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
+            <p></p>
 
-            <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
+            <p></p>
           </div>
           <div class="col-md-5">
             <h2 class="mb-5">Why Us</h2>
@@ -40,24 +39,24 @@
             <div class="media mb-5">
               <div class="probootstrap-icon"><span class="icon-fingerprint display-4"></span></div>
               <div class="media-body">
-                <h5 class="mt-0">Free Bootstrap 4</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h5 class="mt-0">Family Cars</h5>
+                <p>Check out our range of family cars, including a range of 7 seat SUV's and People Movers </p>
               </div>
             </div>
 
             <div class="media mb-4">
               <div class="probootstrap-icon"><span class="icon-users display-4"></span></div>
               <div class="media-body">
-                <h5 class="mt-0">For The Community</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h5 class="mt-0">Utility Vehicles</h5>
+                <p>Need to move a load, or maybe get something that can tow with 4x4. We have a range of single and Double cab options</p>
               </div>
             </div>
 
             <div class="media mb-5">
               <div class="probootstrap-icon"><span class="icon-chat display-4"></span></div>
               <div class="media-body">
-                <h5 class="mt-0">Support Us By Sharing This to Others</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h5 class="mt-0">New Releases Every Week</h5>
+                <p>From vans to 2 door compacts, we're constantly growing our fleet</p>
               </div>
             </div>
 
@@ -70,22 +69,18 @@
       <div class="container">
         <div class="row">
           <div class="col-md-6 pl-md-5 pb-5 order-md-2 order-1">
-            <h2 class="mb-4 display-5 probootstrap-heading">Free Template by uiCookies</h2>
+            <h2 class="mb-4 display-5 probootstrap-heading">Phone Friendly</h2>
             <div class="probootstrap-item mb-4">
-              <h3>Free Download</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. </p>
+              <h3>Progressive Web App </h3>
+              <p>Our website is built as a PWA. This allows you to use our site like an app, but constantly have the latest version and data without an update required </p>
             </div>
             <div class="probootstrap-item mb-4">
               <h3>Keep Updated</h3>
-              <p>Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
+              <p>Later versions of the site will include reminder notifications </p>
             </div>
             <div class="probootstrap-item mb-4">
               <h3>New Releases Every Week</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-            </div>
-            <div class="probootstrap-item mb-4">
-              <h3>Donate Any Amount</h3>
-              <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+              <p>Check out our ever growing fleet of cars</p>
             </div>
           </div>
 
@@ -106,8 +101,8 @@
             <div class="media">
               <div class="probootstrap-icon"><span class="icon-fingerprint display-4"></span></div>
               <div class="media-body">
-                <h5 class="mt-0">Free Bootstrap 4</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h5 class="mt-0">Secure</h5>
+                <p>Multi Layered Password Encryption</p>
               </div>
             </div>
           </div>
@@ -115,8 +110,8 @@
             <div class="media">
               <div class="probootstrap-icon"><span class="icon-users display-4"></span></div>
               <div class="media-body">
-                <h5 class="mt-0">For The Community</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h5 class="mt-0">24 Hour Support</h5>
+                <p>Phone our helpdesk if you have any issues</p>
               </div>
             </div>
           </div>
@@ -124,8 +119,8 @@
             <div class="media">
               <div class="probootstrap-icon"><span class="icon-chat display-4"></span></div>
               <div class="media-body">
-                <h5 class="mt-0">Support Us By Sharing This to Others</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
+                <h5 class="mt-0">Print your Invoices</h5>
+                <p>Print or email your invoices</p>
               </div>
             </div>
           </div>
