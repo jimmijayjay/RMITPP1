@@ -50,12 +50,27 @@
             Kind Regards,
             Car Buddy Team
             ';
-            sendEmail($subject, $emailMessage, $email);
+            sendEmail($subject, $emailMessage, $email);         
+            
+            /*To fix the session var issue when user resets passwords multiple times in a short period of time*/
+            if (session_status() == PHP_SESSION_NONE) {
+               session_start();
+            }
+            if(isset($_SESSION['s_forgetpassword_hash'])){
+                unset($_SESSION['s_forgetpassword_hash']);
+            }
+            if(isset($_SESSION['s_email'])){
+                unset($_SESSION['s_email']);
+            }
+            
+
             header("Location: ./forgetpassword_success_landing.php");
           
       }
       
       //http://localhost/newcarbuddy/rmitpp1/resetpassword.php?email='.$email.'&forgetpassword_hash='.$forgetpassword_hash.'
+      //http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$forgetpassword_hash.'
+      
   }
 
 
