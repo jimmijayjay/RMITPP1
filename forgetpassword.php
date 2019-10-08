@@ -24,8 +24,12 @@
       </div>
     </section>
 
-<form action="forgetpassword.php" method="post" class="probootstrap-form mb-5">
-    <?php include('tools/errors.php'); ?>                
+    <section class="probootstrap-section">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <form action="forgetpassword.php" method="post" class="probootstrap-form mb-5">
+              <?php include('tools/errors.php'); ?>
               <div class="form-group">
                 <label for="email">Email</label>
                 <input type="email" class="form-control" id="email" name="email" value="<?php echo $email; ?>">
@@ -33,8 +37,11 @@
               <div class="form-group">
                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Reset Password">
               </div>
-
-</form>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
 
 
 <?php include_once('tools/footer.php'); ?>  
