@@ -21,7 +21,7 @@
 
       <input type="hidden" id="res_notes" value="test"/>
       <label for="vehicle_id">Vehicle ID</label>
-      <input type="text" required id="vehicle_id" value="1"/>
+      <input type="text" required id="vehicle_id"  value="<?php echo $_POST['location'];?>"/>
       <label>Reservation Start Date</label>
       <div id="res_start" class="calendar"></div>
       <label>Reservation Start Time</label>
