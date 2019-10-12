@@ -27,8 +27,9 @@
 </div>
 </section>-->
 
-
-<div id="mapid" style="width: 100%; height: 600px;"></div>
+<form>
+<div id="mapid" style="width: 80%;	height: 600px;	margin: 0 auto;	margin-top: 20px;	margin-bottom: 20px;"></div>
+</form>
 
 
 <script>
@@ -43,87 +44,74 @@ L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=p
   id: 'mapbox.streets'
 }).addTo(mymap);
 
-L.marker([-37.8142, 144.955]).addTo(mymap)
-.bindPopup("<b>Location 1</b><br />Ford Ranger.");
+L.marker([-37.8142, 144.955]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Public Parking</b><br>248 Lonsdale Street<br />Ford Ranger.");
 
-L.marker([-37.8142, 144.956]).addTo(mymap)
-.bindPopup("<b>Location 2</b><br />Toyota Hilux.");
+L.marker([-37.8142, 144.956]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Public Parking</b><br>557 Lonsdale Street<br />Toyota Hilux.");
 
-L.marker([-37.8135, 144.958]).addTo(mymap)
-.bindPopup("<b>Location 3</b><br />Nissan Nivara.");
+L.marker([-37.8135, 144.958]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Public Parking</b><br>483 Lonsdale Street<br />Nissan Nivara.");
 
-L.marker([-37.8093, 144.956]).addTo(mymap)
-.bindPopup("<b>Location 4</b><br />Mitsubshi Triton.");
+L.marker([-37.8093, 144.956]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Franklin Street Public Carpark<br />Mitsubsihi Triton.");
 
-L.marker([-37.8087, 144.956]).addTo(mymap)
-.bindPopup("<b>Location 5</b><br />Toyota LandCruiser.");
+L.marker([-37.8087, 144.956]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Queen Victoria Market Public Carpark<br />Toyota LandCruiser.");
 
-L.marker([-37.8083, 144.957]).addTo(mymap)
-.bindPopup("<b>Location 6</b><br />Ford Falcon FGX.");
+L.marker([-37.8083, 144.957]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Queen Victoria Market  Public Carpark<br />Ford Falcon FGX.");
 
-L.marker([-37.8087, 144.957]).addTo(mymap)
-.bindPopup("<b>Location 7</b><br />Holden Commodore VF.");
+L.marker([-37.8087, 144.957]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Queen Victoria Market  Public Carpark<br />Holden Commodore VF.");
 
-L.marker([-37.8087, 144.959]).addTo(mymap)
-.bindPopup("<b>Location 8</b><br />Mazda 6.");
+L.marker([-37.8087, 144.959]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>175 Franklin Street Public Carpark<br />Mazda 6.");
 
-L.marker([-37.8084, 144.96]).addTo(mymap)
-.bindPopup("<b>Location 9</b><br />Jaguar XF.");
+L.marker([-37.8084, 144.96]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>139 Franklin Street Public Carpark<br />Jaguar XF.");
 
-L.marker([-37.8079, 144.961]).addTo(mymap)
-.bindPopup("<b>Location 10</b><br />Audi A6.");
+L.marker([-37.8079, 144.961]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>107 Franklin Street Public Carpark<br />Audi A6.");
 
-L.marker([-37.807, 144.958]).addTo(mymap)
-.bindPopup("<b>Location 11</b><br />Toyota Corolla.");
+L.marker([-37.807, 144.958]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Queen Street Public Carpark<br />Toyota Corolla.");
 
-L.marker([-37.8066, 144.958]).addTo(mymap)
-.bindPopup("<b>Location 12</b><br />Hyundai i30.");
+L.marker([-37.8066, 144.958]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Queen Street Public Carpark<br />Hyundai i30.");
 
-L.marker([-37.8066, 144.955]).addTo(mymap)
-.bindPopup("<b>Location 13</b><br />Mazda 3.");
+L.marker([-37.8066, 144.955]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>65 Capel Street Public Carpark<br />Mazda 3.");
 
-L.marker([-37.8071, 144.955]).addTo(mymap)
-.bindPopup("<b>Location 14</b><br />Ford Focus.");
+L.marker([-37.8071, 144.955]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>42 Capel Street Public Carpark<br />Ford Focus.");
 
-L.marker([-37.8075, 144.955]).addTo(mymap)
-.bindPopup("<b>Location 15</b><br />Hyundai Veloster.");
+L.marker([-37.8075, 144.955]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>22 Capel Street Public Carpark<br />Hyundai Veloster.");
 
-L.marker([-37.8074, 144.953]).addTo(mymap)
-.bindPopup("<b>Location 16</b><br />Kia Carnival.");
+L.marker([-37.8074, 144.953]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>40 Rosslyn Street Public Carpark<br />Kia Carnival.");
 
-L.marker([-37.8078, 144.952]).addTo(mymap)
-.bindPopup("<b>Location 17</b><br />Honda Odyssey Vti-L.");
+L.marker([-37.8078, 144.952]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>70 Rosslyn Street Public Carpark<br />Honda Odyssey Vti-L.");
 
-L.marker([-37.8084, 144.951]).addTo(mymap)
-.bindPopup("<b>Location 18</b><br />Toyota HiAce.");
+L.marker([-37.8084, 144.951]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>96 Rosslyn Street Public Carpark<br />Toyota HiAce.");
 
-L.marker([-37.808, 144.95]).addTo(mymap)
-.bindPopup("<b>Location 19</b><br />Mazda MX-5.");
+L.marker([-37.808, 144.95]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>Stanley Street Public Carpark<br />Mazda MX-5.");
 
-L.marker([-37.8088, 144.948]).addTo(mymap)
-.bindPopup("<b>Location 20</b><br />BMW M850i.");
+L.marker([-37.8088, 144.948]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>130 Stanley Street Public Carpark<br />BMW M850i.");
 
-L.marker([-37.8083, 144.946]).addTo(mymap)
-.bindPopup("<b>Location 21</b><br />Alfa Romeo 4C.");
+L.marker([-37.8083, 144.946]).on('click', markerOnClick).addTo(mymap)
+.bindPopup("<b>Melbourne CBD - Secure Parking</b><br>143 Hawke Street Public Carpark<br />Alfa Romeo 4C.");
 
-/*
-L.marker([51.5, -0.09]).addTo(mymap)
-.bindPopup("<b>Hello world!</b><br />I am a popup.").openPopup();
-
-L.circle([51.508, -0.11], 500, {
-  color: 'red',
-  fillColor: '#f03',
-  fillOpacity: 0.5
-}).addTo(mymap).bindPopup("I am a circle.");
-
-L.polygon([
-  [51.509, -0.08],
-  [51.503, -0.06],
-  [51.51, -0.047]
-  ]).addTo(mymap).bindPopup("I am a polygon.");
-  */
   
   var popup = L.popup();
+  var strLong = "";
+  var strLat = "";
+  
   
   function onMapClick(e) {
     popup
@@ -131,6 +119,14 @@ L.polygon([
     .setContent("You clicked the map at " + e.latlng.toString())
     .openOn(mymap);
   }
+  
+  /*  ONCLICK MY MARKER   */
+  function markerOnClick(e)
+  {
+    strLong = e.latlng.lat;
+    strLat = e.latlng.lng;
+  }
+
   
   mymap.on('click', onMapClick);
   
