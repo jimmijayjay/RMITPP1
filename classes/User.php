@@ -135,7 +135,7 @@ class User
           Car Buddy Team
           ';
 
-          //$this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          $this->_sendMail->sendEmail($subject, $emailMessage, $email);
 
           $return = true;
       } else {
@@ -182,7 +182,7 @@ class User
           Car Buddy Team
           ';
 
-          //$this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          $this->_sendMail->sendEmail($subject, $emailMessage, $email);
 
           $return = true;
         } else {
