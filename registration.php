@@ -8,12 +8,6 @@
 
     $db = DB::getInstance();
 
-    $firstName = $db->_conn->real_escape_string($_POST['firstName']);
-    $lastName = $db->_conn->real_escape_string($_POST['lastName']);
-    $email = $db->_conn->real_escape_string(preg_replace('/\s+/', '', $_POST['email']));
-    $password1 = $db->_conn->real_escape_string($_POST['password1']);
-    $password2 = $db->_conn->real_escape_string($_POST['password2']);
-
     $validate = new Validate();
 
     $validate->check($_POST, array(
@@ -24,29 +18,39 @@
       'password2' => array('required' => true)
     ));
 
-    if (strlen($password1) > 50) {
-        array_push($errors, "Password is too long");
-    }
-
-    if (strlen($firstName) > 100 OR strlen($lastName) > 100) {
-        array_push($errors, "First name or last name is too long");
-    }
-
-    if ($password1 != $password2) {
-        array_push($errors, "The two passwords are not the same");
-    }
-
     if ($validate->passed()) {
-      $user = new User();
 
-      if ($user->register($firstName, $lastName, $email, $password1)) {
-        Redirect::to('index.php');
-      } else {
-        array_push($errors, "Registration Failed. Please try again later.");
+      $firstName = $db->_conn->real_escape_string($_POST['firstName']);
+      $lastName = $db->_conn->real_escape_string($_POST['lastName']);
+      $email = $db->_conn->real_escape_string(preg_replace('/\s+/', '', $_POST['email']));
+      $password1 = $db->_conn->real_escape_string($_POST['password1']);
+      $password2 = $db->_conn->real_escape_string($_POST['password2']);
+
+      if (strlen($password1) > 50) {
+          array_push($errors, "Password is too long");
       }
-    } else {
+
+      if (strlen($firstName) > 100 OR strlen($lastName) > 100) {
+          array_push($errors, "First name or last name is too long");
+      }
+
+      if ($password1 != $password2) {
+          array_push($errors, "The two passwords are not the same");
+      }
+
+      if (count($errors) == 0) {
+        $user = new User();
+
+        if ($user->register($firstName, $lastName, $email, $password1)) {
+          Redirect::to('reg_success_landing.php');
+        } else {
+          array_push($errors, "Registration Failed. Please try again later.");
+        }
+      }
+    }
+
+    if (count($errors) > 0) {
       foreach($validate->errors() as $error) {
-        //$errorMessage .= $error . '<br>';
         array_push($errors, $error);
       }
     }

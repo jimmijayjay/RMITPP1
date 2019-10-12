@@ -10,13 +10,14 @@ class User
           $FirstName,
           $LastName,
           $Email,
+          $UserTypeID,
           $_sessionName;
 
   // Default constructor
   public function __construct($user = null)
   {
     $this->_db = DB::getInstance();
-    //$this->_sendMail = Email::getInstance();
+    $this->_sendMail = Email::getInstance();
 
     $this->_sessionName = Config::get('sessions/session_name');
 
@@ -36,12 +37,13 @@ class User
   }
 
   // Setup user
-  private function setup($userid, $firstname, $lastname, $email)
+  private function setup($userid, $firstname, $lastname, $email, $userTypeID)
   {
     $this->UserID = $userid;
     $this->FirstName = $firstname;
     $this->LastName = $lastname;
     $this->Email = $email;
+    $this->UserTypeID = $userTypeID;
 
     Session::put($this->_sessionName, $this);
   }
@@ -67,6 +69,11 @@ class User
     return $this->Email;
   }
 
+  public function getUserTypeID()
+  {
+    return $this->UserTypeID;
+  }
+
   // Check user logged in status
   public function isLoggedIn()
   {
@@ -79,53 +86,169 @@ class User
   // Login method
   public function login($email = null, $password = null)
   {
+    $return = false;
     $passwordHash = md5($password);
 
-    if ($result = $this->_db->_conn->query("SELECT UserID, FirstName, LastName, Email FROM Users WHERE Email = '$email' AND Password = '$passwordHash'")) {
+    $mysqli = $this->_db->_conn;
+
+    if ($result = $mysqli->query("SELECT UserID, FirstName, LastName, Email, UserTypeID FROM Users WHERE Active = 1 AND Email = '$email' AND Password = '$passwordHash'")) {
       if ($result->num_rows == 1) {
         $thisUser = $result->fetch_array();
 
-        $this->setup($thisUser[0], $thisUser[1], $thisUser[2], $thisUser[3]);
-      } else {
-        return false;
+        $this->setup($thisUser[0], $thisUser[1], $thisUser[2], $thisUser[3], $thisUser[4]);
       }
 
       $result->close();
 
-      return true;
+      $return = true;
+    } else {
+      echo $result->error;
     }
 
-    return false;
+    return $return;
   }
 
   // Register method
   public function register($firstname = null, $lastname = null, $email = null, $password = null)
   {
+    $return = false;
     $hash = md5(rand(0,1000));
     $passwordHash = md5($password);
 
-    if ($result = $this->_db->_conn->query("INSERT INTO Users (FirstName, LastName, Email, Password, Hash, UserTypeID) VALUES ('$firstname', '$lastname', '$email', '$passwordHash', '$hash', 2)")) {
+    $mysqli = $this->_db->_conn;
 
-      //$result->close();
-/*
-        $subject = "Welcome to Car Buddy! Confirm your email";
-        $emailMessage = '
+    // Check if this email already exist
+    $result = $mysqli->query("SELECT UserID FROM Users WHERE Email = '$email'");
 
-        Hi '.$firstname.',
+    if ($result->num_rows == 0) {
+      if ($insertResult = $mysqli->query("INSERT INTO Users (FirstName, LastName, Email, Password, Hash, UserTypeID) VALUES ('$firstname', '$lastname', '$email', '$passwordHash', '$hash', 2)")) {
 
-        Please click on the below link to activate your Car Buddy account:
-        http://www.carbuddy.ga/verify.php?email='.$email.'&hash='.$hash.'
+          $subject = "Welcome to Car Buddy! Confirm your email";
+          $emailMessage = '
 
-        Kind Regards,
-        Car Buddy Team
-        ';
-*/
-        //$this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          Hi '.$firstname.',
 
-      return true;
+          Please click on the below link to activate your Car Buddy account:
+          http://www.carbuddy.ga/verify.php?email='.$email.'&hash='.$hash.'
+
+          Kind Regards,
+          Car Buddy Team
+          ';
+
+          //$this->_sendMail->sendEmail($subject, $emailMessage, $email);
+
+          $return = true;
+      } else {
+        echo $insertResult->error;
+      }
+
+      $result->close();
     }
 
-    return false;
+    return $return;
+  }
+
+  // Forget password method
+  public function forgetPassword($email = null)
+  {
+    $return = false;
+    $hash = md5(rand(0,1000));
+    $passwordHash = md5($password);
+
+    $mysqli = $this->_db->_conn;
+
+    // Get other details for this user
+
+    if ($result = $mysqli->query("SELECT UserID, FirstName FROM Users WHERE Active = 1 AND Email = '$email'")) {
+      if ($result->num_rows == 1) {
+        $hash = md5(rand(0,1000));
+
+        $thisUser = $result->fetch_array();
+        $userid = $thisUser[0];
+        $firstName = $thisUser[1];
+
+        if ($update = $mysqli->query("UPDATE Users SET ForgetPasswordHash = '$hash' WHERE UserID = $userid")) {
+          $subject = "Car Buddy - Reset Your Password";
+          $emailMessage = '
+
+          Hi '.$firstName.',
+
+          You have requested resetting your password.
+
+          Please click on the below link to reset password of your Car Buddy account:
+          http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$hash.'
+
+          Kind Regards,
+          Car Buddy Team
+          ';
+
+          //$this->_sendMail->sendEmail($subject, $emailMessage, $email);
+
+          $return = true;
+        } else {
+          echo $update->error;
+        }
+
+        $result->close();
+      }
+    }
+
+    return $return;
+  }
+
+  // Reset Password method
+  public function resetPassword($email = null, $hash = null, $password = null)
+  {
+    $return = false;
+    $passwordHash = md5($password);
+
+    $mysqli = $this->_db->_conn;
+
+    // Check if this email already exist
+
+    if ($result = $mysqli->query("SELECT UserID FROM Users WHERE Active = 1 AND Email = '$email' AND ForgetPasswordHash = '$hash'")) {
+      if ($result->num_rows == 1) {
+
+        $thisUser = $result->fetch_array();
+        $userid = $thisUser[0];
+
+        if ($updateResult = $mysqli->query("UPDATE Users SET Password = '$passwordHash', ForgetPasswordHash = '' WHERE UserID = $userid")) {
+            $return = true;
+        } else {
+          echo $updateResult->error;
+        }
+
+        $result->close();
+      }
+    }
+
+    return $return;
+  }
+
+  // Verify method
+  public function verify($email = null, $hash = null)
+  {
+    $return = false;
+    $mysqli = $this->_db->_conn;
+
+    // Check if this email already exist
+    $result = $mysqli->query("SELECT UserID FROM Users WHERE Active = 0 AND Email = '$email' AND Hash = '$hash'");
+
+    if ($result->num_rows == 1) {
+
+      $thisUser = $result->fetch_array();
+      $userid = $thisUser[0];
+
+      if ($update = $mysqli->query("UPDATE Users SET Active = 1 WHERE UserID = $userid")) {
+          $return = true;
+      } else {
+        echo $update->error;
+      }
+
+      $result->close();
+    }
+
+    return $return;
   }
 
   // Find by ID

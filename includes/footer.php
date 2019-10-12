@@ -72,9 +72,3 @@
 <script src="js/main.js"></script>
 </body>
 </html>
-
-<?php
-  if (isset($db)) {
-      $db->close();
-  }
- ?>

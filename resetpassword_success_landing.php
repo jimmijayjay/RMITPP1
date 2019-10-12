@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-
-<?php include_once('tools/head.php'); ?>
-  <body>
-    <?php include_once('tools/nav.php'); ?>    
+<?php include_once('includes/header.php'); ?>
 
      <section class="probootstrap-cover">
       <div class="container">
@@ -21,16 +15,7 @@
       </div>
     </section>
 
-  
 
 
-    <?php include_once('tools/footer.php'); ?>  
 
-
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    
-  </body>
-</html>
+    <?php include_once('includes/footer.php'); ?>  

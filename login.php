@@ -2,7 +2,7 @@
 
   require_once 'includes/init.php';
 
-  $errorMessage;
+  $errors = array();
 
   if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $validate = new Validate();
@@ -14,13 +14,17 @@
 
     if ($validate->passed()) {
       $user = new User();
-      
+
       if ($user->login($_POST['email'], $_POST['password'])) {
-        Redirect::to('index.php');
+        if ($user->getUserTypeID() == 1) {
+          Redirect::to('admin/index.php');
+        } else {
+          Redirect::to('index.php');
+        }
       }
     } else {
       foreach($validate->errors() as $error) {
-        $errorMessage .= $error . '<br>';
+        array_push($errors, $error);
       }
     }
   }
@@ -50,14 +54,7 @@
     <div class="row">
       <div class="col-md-12">
         <form action="login.php" method="post" class="probootstrap-form mb-5">
-        <p style="color: red;">
-          <?php
-            if (!empty($errorMessage)) {
-              echo $errorMessage;
-            }
-          ?>
-        </p>
-
+        <?php include('includes/errors.php'); ?>
           <div class="row">
           </div>
           <div class="form-group">
