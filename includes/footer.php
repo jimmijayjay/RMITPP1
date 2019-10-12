@@ -73,4 +73,8 @@
 </body>
 </html>
 
-<?php ?>
+<?php
+  if (isset($db)) {
+      $db->close();
+  }
+ ?>

@@ -1,10 +1,60 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once('tools/registration_server.php') ?>
+<?php
 
- <?php include_once('tools/head.php'); ?>
-  <body>
-    <?php include_once('tools/nav.php'); ?>    
+  require_once 'includes/init.php';
+
+  $errors = array();
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
+    $db = DB::getInstance();
+
+    $firstName = $db->_conn->real_escape_string($_POST['firstName']);
+    $lastName = $db->_conn->real_escape_string($_POST['lastName']);
+    $email = $db->_conn->real_escape_string(preg_replace('/\s+/', '', $_POST['email']));
+    $password1 = $db->_conn->real_escape_string($_POST['password1']);
+    $password2 = $db->_conn->real_escape_string($_POST['password2']);
+
+    $validate = new Validate();
+
+    $validate->check($_POST, array(
+      'firstName' => array('required' => true),
+      'lastName' => array('required' => true),
+      'email' => array('required' => true),
+      'password1' => array('required' => true),
+      'password2' => array('required' => true)
+    ));
+
+    if (strlen($password1) > 50) {
+        array_push($errors, "Password is too long");
+    }
+
+    if (strlen($firstName) > 100 OR strlen($lastName) > 100) {
+        array_push($errors, "First name or last name is too long");
+    }
+
+    if ($password1 != $password2) {
+        array_push($errors, "The two passwords are not the same");
+    }
+
+    if ($validate->passed()) {
+      $user = new User();
+
+      if ($user->register($firstName, $lastName, $email, $password1)) {
+        Redirect::to('index.php');
+      } else {
+        array_push($errors, "Registration Failed. Please try again later.");
+      }
+    } else {
+      foreach($validate->errors() as $error) {
+        //$errorMessage .= $error . '<br>';
+        array_push($errors, $error);
+      }
+    }
+  }
+
+  include_once('includes/header.php');
+
+?>
 
      <section class="probootstrap-cover">
       <div class="container">
@@ -28,31 +78,32 @@
         <div class="row">
           <div class="col-md-12">
             <form action="registration.php" method="post" class="probootstrap-form mb-5">
-            <?php include('tools/errors.php'); ?>
+            <?php include('includes/errors.php'); ?>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="<?php echo $error;?>">
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder="Please enter your firstname">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName">
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder="Please enter your lastname">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email">
+                <input type="email" class="form-control" id="email" name="email" placeholder="Please enter your email">
               </div>
               <div class="form-group">
-              <label for="password1">Password</label>
-                <input type="password" class="form-control" id="password1" name="password1">
-              </div>              <div class="form-group">
-              <label for="password2">Confirm Password</label>
-                <input type="password" class="form-control" id="password2" name="password2">
+                <label for="password1">Password</label>
+                <input type="password" class="form-control" id="password1" name="password1" placeholder="Please enter your password">
+              </div>
+              <div class="form-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" class="form-control" id="password2" name="password2" placeholder="Please enter your password again to confirm">
               </div>
               <div class="form-group">
                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Register">
@@ -172,13 +223,4 @@
       </div>
     </section>
 
-    <?php include_once('tools/footer.php'); ?>  
-
-
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    
-  </body>
-</html>
+<?php include_once('includes/footer.php'); ?>

@@ -1,3 +1,14 @@
+<?php
+
+  if (isset($_SESSION[Config::get('sessions/session_name')])) {
+    $thisUser = $_SESSION[Config::get('sessions/session_name')];
+  } else {
+    $thisUser = new User();
+  }
+
+?>
+
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
   <div class="container">
     <a class="navbar-brand" href="index.php">CAR BUDDY </a>
@@ -12,7 +23,7 @@
         <li class="nav-item"><a href="findCars.php" class="nav-link">Find Cars</a></li>
         <li class="nav-item"><a href="services.php" class="nav-link">Make a Booking</a></li>
         <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
-        <?php if ($_SESSION["userid"] != NULL) { ?>
+        <?php if ($thisUser->isLoggedIn()) { ?>
           <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="user.php" class="nav-link">Update Details</a></li>
           <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="tools/logout.php" class="nav-link">Log Out</a></li>
         <?php } else { ?>

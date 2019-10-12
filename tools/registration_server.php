@@ -19,7 +19,7 @@
       $email = mysqli_real_escape_string($db, preg_replace('/\s+/', '', $_POST['email']));
       $password1 = mysqli_real_escape_string($db, $_POST['password1']);
       $password2 = mysqli_real_escape_string($db, $_POST['password2']);
-      
+
       // Form validation: all input fields are required
       if (empty($firstName)) {
           array_push($errors, "First name not entered");

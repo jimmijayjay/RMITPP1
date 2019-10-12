@@ -1,8 +1,6 @@
 <?php
-  session_start();
-  include_once("db_connect.php");
+  require_once 'init.php';
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
@@ -20,3 +18,6 @@
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
 </head>
+
+<body>
+<?php include_once("nav.php"); ?>

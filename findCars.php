@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-    <?php include_once('tools/head.php'); ?>
-    <body>
-      <?php include_once('tools/nav.php'); ?>    
+<?php include_once('includes/header.php'); ?>
 
      <section class="probootstrap-cover">
       <div class="container">
@@ -45,13 +41,13 @@
               <p>2019 Toyota Corolla</p>
               <p>Hyundai i30</p>
               <p>Mazda 3</p>
-            </div>            
+            </div>
             <div class="probootstrap-item mb-4">
               <h3>Popular Van's</h3>
               <p>Our popular Vans include the following:</p>
               <p>Toyota HiAce</p>
               <p>Kia Carnival</p>
-            </div>            
+            </div>
             <div class="probootstrap-item mb-4">
               <h3>Popular Convertibles's</h3>
               <p>Our popular convertibles include the following:</p>
@@ -63,13 +59,5 @@
         </div>
       </div>
     </section>
-    
-    <?php include_once('tools/footer.php'); ?>  
 
-
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-  </body>
-</html>
+<?php include_once('includes/footer.php'); ?>
