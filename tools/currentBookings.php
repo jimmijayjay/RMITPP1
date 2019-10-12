@@ -52,8 +52,8 @@ function array_multi_group_by_key($input_array, $key, $remove_key = false, $flat
 
         //}
       }
-      echo "<h1>output_array</h1>";
-      echo '<pre>'; print_r($output_array); echo '</pre>';
+      //echo "<h1>output_array</h1>";
+      //echo '<pre>'; print_r($output_array); echo '</pre>';
       //echo "<h1>output_array2</h1>";
       //echo '<pre>'; print_r($output_array2); echo '</pre>';
 
