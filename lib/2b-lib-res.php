@@ -98,9 +98,9 @@ class Res {
   // bookRange() : reserve for the date range
 
     // Check if customer already booked within the date range
-    $sql = "SELECT * FROM `BookingsCurrent` WHERE (`BookingStartTime` BETWEEN ? AND ?) OR (`BookingEndTime` BETWEEN ? AND ?)";
-    $cond = [$start, $end, $start, $end];
-    $check = $this->fetch($sql, $cond);
+    $sql = "SELECT * FROM `BookingsCurrent` WHERE (((`BookingStartTime` BETWEEN ? AND ?) OR (`BookingEndTime` BETWEEN ? AND ?)) AND `VehicleID` = ?)";
+    $cond = [$start, $end, $start, $end, $vehicle_id];
+    $check = $this->fetch($sql, $cond); 
     if (count($check)>0) {
       $this->error = "This car is not available for the whole period between " . $start . " and " . $end;
       return false;
