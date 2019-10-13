@@ -4,10 +4,10 @@ error_reporting(E_ALL & ~E_NOTICE);
  
 // DATABASE SETTINGS - CHANGE THESE TO YOUR OWN
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'carbuddy');
+define('DB_NAME', 'car_buddy');
 define('DB_CHARSET', 'utf8');
-define('DB_USER', '');
-define('DB_PASSWORD', '');
+define('DB_USER', 'root');
+define('DB_PASSWORD', 'password23');
 
 // FILE PATH
 define('PATH_LIB', __DIR__ . DIRECTORY_SEPARATOR);
