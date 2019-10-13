@@ -98,7 +98,7 @@ class Res {
   // bookRange() : reserve for the date range
 
     // Check if customer already booked within the date range
-    $sql = "SELECT * FROM `bookingscurrent` WHERE (`BookingStartTime` BETWEEN ? AND ?) OR (`BookingEndTime` BETWEEN ? AND ?)";
+    $sql = "SELECT * FROM `BookingsCurrent` WHERE (`BookingStartTime` BETWEEN ? AND ?) OR (`BookingEndTime` BETWEEN ? AND ?)";
     $cond = [$start, $end, $start, $end];
     $check = $this->fetch($sql, $cond);
     if (count($check)>0) {
@@ -108,7 +108,7 @@ class Res {
     
     //$vehicle_id = 6;
     // Process reservation
-    $sql = "INSERT INTO `bookingscurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
+    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
     $cond = [$start, $end, $vehicle_id];
     return $this->exec($sql, $cond);
   }
