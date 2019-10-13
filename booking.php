@@ -6,10 +6,7 @@
   <body>
     <?php include_once('tools/nav.php'); ?>    
     <?php include_once('tools/currentBookings.php'); ?>    
-    <pre>
-    <?php print_r($_POST); ?>
-    </pre>
-     <section class="probootstrap-cover">
+    <section class="probootstrap-cover">
       <div class="container">
         <div class="row probootstrap-vh-75 align-items-center text-left">
           <div class="col-sm">
