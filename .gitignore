@@ -2,3 +2,4 @@
 /tools/UnitTest/Vendor
 /tools/vendor
 composer.lock
+.DS_Store
