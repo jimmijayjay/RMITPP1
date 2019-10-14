@@ -1,8 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<?php include_once('tools/head.php'); ?>
-<body>
-<?php include_once('tools/nav.php'); ?>    
+<?php include_once('includes/header.php'); ?>
 
 <section class="probootstrap-cover">
 <div class="container">
@@ -107,19 +103,19 @@ L.marker([-37.8088, 144.948]).on('click', markerOnClick).addTo(mymap)
 L.marker([-37.8083, 144.946]).on('click', markerOnClick).addTo(mymap)
 .bindPopup("<b>Melbourne CBD - Secure Parking</b><br>143 Hawke Street Public Carpark<br />Alfa Romeo 4C.");
 
-  
+
   var popup = L.popup();
   var strLong = "";
   var strLat = "";
-  
-  
+
+
   function onMapClick(e) {
     popup
     .setLatLng(e.latlng)
     .setContent("You clicked the map at " + e.latlng.toString())
     .openOn(mymap);
   }
-  
+
   /*  ONCLICK MY MARKER   */
   function markerOnClick(e)
   {
@@ -127,17 +123,9 @@ L.marker([-37.8083, 144.946]).on('click', markerOnClick).addTo(mymap)
     strLat = e.latlng.lng;
   }
 
-  
+
   mymap.on('click', onMapClick);
-  
+
   </script>
-  
-  <?php include_once('tools/footer.php'); ?>  
-  
-  
-  <script src="js/jquery-3.2.1.slim.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-  </body>
-  </html>
+
+  <?php include_once('includes/footer.php'); ?>  
