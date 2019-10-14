@@ -1,8 +1,20 @@
 <?php
+  spl_autoload_register(function($class) {
+    //require_once 'classes/' . $class . '.php';
+
+    if (file_exists('../../classes/' . $class . '.php')) {
+      require_once '../../classes/' . $class . '.php';
+
+    } else if (file_exists('../../vendor/' . $class . '.php')) {
+      require_once '../../vendor/' . $class . '.php';
+    }
+  });
+
   session_start();
+
   include_once($_SERVER["DOCUMENT_ROOT"] . '/includes/db_connect.php');
 
-  if ( !isset($_SESSION["admin_loggedin"]) || (isset($_SESSION["admin_loggedin"]) && !$_SESSION["admin_loggedin"]) ) {
+  if ( !isset($_SESSION["carbuddy"]) || (isset($_SESSION["carbuddy"]) && !$_SESSION["carbuddy"]->isLoggedIn())) {
     header("location: ../../index.php");
   }
 ?>
@@ -17,7 +29,7 @@
 <body>
   <div id="top_banner">
     <h1>CarBuddy Admin</h1>
-    <p>Welcome <?php echo $_SESSION["firstname"] ?> <?php echo $_SESSION["lastname"] ?></p>
+    <p>Welcome <?php echo $_SESSION["carbuddy"]->getFirstName() ?> <?php echo $_SESSION["carbuddy"]->getLastName() ?></p>
   </div>
   <div id="sidebar">
     <ul id="admin_side_menu">
