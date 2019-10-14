@@ -15,6 +15,8 @@
 <link rel="stylesheet" href="css/open-iconic-bootstrap.min.css">
 <link rel="stylesheet" href="css/icomoon.css">
 <link rel="stylesheet" href="css/style.css">
+<script src="public/3c-reserve-range.js"></script>
+<link href="public/3-theme.css" rel="stylesheet">
 </head>
 
 <body>
