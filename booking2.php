@@ -1,11 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
+<?php include_once('includes/header.php'); ?>
 
- <?php include_once('tools/head.php'); ?>
-
-  <body>
-    <?php include_once('tools/nav.php'); ?>    
-    <?php //include_once('tools/currentBookings.php'); ?>    
     <section class="probootstrap-cover">
       <div class="container">
         <div class="row probootstrap-vh-75 align-items-center text-left">
