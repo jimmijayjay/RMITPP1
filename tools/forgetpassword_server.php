@@ -18,7 +18,7 @@
       }
       
       //Checking whehter the email address has been registered
-      $email_check_query = "SELECT userid, firstName FROM Users WHERE email = '$email' LIMIT 1";       
+      $email_check_query = "SELECT UserID, FirstName FROM Users WHERE Email = '$email' LIMIT 1";       
       $result = mysqli_query($db, $email_check_query);        
       $row = mysqli_fetch_assoc($result);     
       if (!$row) {
@@ -27,14 +27,14 @@
       
       //If no error, sender verification link to let user reset password
       if (count($errors) == 0) {
-            $forgetpassword_hash = md5 (rand(0,1000)); // Generate a random 32 character hash
-            $update = $db->query("UPDATE Users SET Forgetpassword_hash = '$forgetpassword_hash' WHERE Email='$email'") or die(mysql_error());
+            $ForgetPasswordHash = md5 (rand(0,1000)); // Generate a random 32 character hash
+            $update = $db->query("UPDATE Users SET ForgetPasswordHash = '$ForgetPasswordHash' WHERE Email='$email'") or die(mysql_error());
 
 
             
-            $firstName = $row['firstName'];
-            print "first name ";
-            print $firstName;
+            $firstName = $row['FirstName'];
+            //print "First name ";
+            //print $firstName;
           
           
             $subject = "Car Buddy - Reset Your Password";
@@ -45,7 +45,7 @@
             Your have requested resetting the password. 
 
             Please click on the below link to reset password of your Car Buddy account:            
-            http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$forgetpassword_hash.'
+            http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$ForgetPasswordHash.'
 
             Kind Regards,
             Car Buddy Team
