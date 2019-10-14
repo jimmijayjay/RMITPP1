@@ -10,8 +10,10 @@
 
                 
                 $email = mysqli_real_escape_string($db, $_GET['email']);
-                $ForgetPasswordHash = mysqli_real_escape_string($db, $_GET['ForgetPasswordHash']);
-                $search = $db->query("SELECT Email, ForgetPasswordHash FROM users WHERE Email='$email' AND ForgetPasswordHash='$ForgetPasswordHash'") or die(mysql_error());
+
+                $ForgetPasswordHash = mysqli_real_escape_string($db, $_GET['forgetpassword_hash']);
+                $search = $db->query("SELECT Email, ForgetPasswordHash FROM Users WHERE Email='$email' AND ForgetPasswordHash='$ForgetPasswordHash'") or die(mysql_error());
+
                 $match  = mysqli_num_rows($search);
                 if($match>0){
                     // Email and hash matches found, no error
