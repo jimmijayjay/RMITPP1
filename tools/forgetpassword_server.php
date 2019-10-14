@@ -45,7 +45,7 @@
             Your have requested resetting the password. 
 
             Please click on the below link to reset password of your Car Buddy account:            
-            http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$ForgetPasswordHash.'
+            http://www.carbuddy.ga/resetpassword.php?email='.$email.'&ForgetPasswordHash='.$ForgetPasswordHash.'
 
             Kind Regards,
             Car Buddy Team
@@ -56,8 +56,8 @@
             if (session_status() == PHP_SESSION_NONE) {
                session_start();
             }
-            if(isset($_SESSION['s_forgetpassword_hash'])){
-                unset($_SESSION['s_forgetpassword_hash']);
+            if(isset($_SESSION['s_ForgetPasswordHash'])){
+                unset($_SESSION['s_ForgetPasswordHash']);
             }
             if(isset($_SESSION['s_email'])){
                 unset($_SESSION['s_email']);
