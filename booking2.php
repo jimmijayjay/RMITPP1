@@ -27,6 +27,7 @@
       $_SESSION['firstname'] = "New user";
       $_SESSION['email'] = "New User";
     }
+    $vehicle_id = $_POST['location'];
     ?>
     <section class="probootstrap-section">
       <div class="container">
@@ -38,7 +39,7 @@
                 <input type="hidden" id="res_tel" value="No Phone Number Stored">
                 <input type="hidden" id="res_notes" value="test"/>
                 <label for="vehicle_id">Vehicle ID</label>
-                <input type= type="hidden" required id="vehicle_id"  value="<?php echo $_POST['location'];?>"/>
+                <input type= type="hidden" required id="vehicle_id"  value="<?php echo $vehicle_id;?>"/>
                 <!-- Model and location info to be printed here and past on at post --->
                 <label>Reservation Start Date</label>
                 <div id="res_start" class="calendar"></div>
