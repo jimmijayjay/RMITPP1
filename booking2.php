@@ -32,8 +32,8 @@
                 <input type="hidden" id="res_email" value=<?php echo $_SESSION['email'];?>/>
                 <input type="hidden" id="res_tel" value="No Phone Number Stored">
                 <input type="hidden" id="res_notes" value="test"/>
-                <label for="vehicle_id">Vehicle ID</label>
-                <input type= type="hidden" required id="vehicle_id"  value="<?php echo $vehicle_id;?>"/>
+                <label for="vehicle_id">Vehicle ID = <?php echo $vehicle_id;?> </label>
+                <input type="hidden" required id="vehicle_id"  value="<?php echo $vehicle_id;?>"/>
                 <!-- Model and location info to be printed here and past on at post --->
                 <label>Reservation Start Date</label>
                 <div id="res_start" class="calendar"></div>
