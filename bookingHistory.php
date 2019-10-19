@@ -13,6 +13,10 @@
   include_once('includes/header.php');
 ?>
 
+<section style="text-align: center;margin: 0 auto;">
+  <a href="user.php">Account Details</a>
+</section>
+
 <section class="probootstrap-cover">
  <div class="container">
    <div class="row probootstrap-vh-75 align-items-center text-left">
@@ -33,6 +37,29 @@
 <div id="account_submenu">
   <a href="account.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>
 </div>
+
+<table style="width:90%;margin: 0 auto;">
+<tr class="bookingHistoryTableHeaders">
+<th>Date</th>
+<th>Vehicle Type</th>
+<th>Vehicle Model</th>
+<th>Booking Duration</th>
+<th>Pick Up Location</th>
+<th>Drop Off Location</th>
+<th>Booking Fee</th>
+</tr>
+<tr class="bookingHistoryTableBody">
+<td>test</td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</table>
 
 <section class="probootstrap-section">
   <div class="container">
@@ -61,7 +88,5 @@
     </div>
   </div>
 </section>
-
-
 
 <?php include_once('includes/footer.php'); ?>

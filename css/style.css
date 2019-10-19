@@ -371,6 +371,18 @@ textarea {
   overflow: hidden;
   background-color: rgba(0, 0, 0, 0.5)}
 
+  /* Booking Histpry Styling */
+  .bookingHistoryTableHeaders {
+    font-family: Arial, sans-serif;
+    font-size: 1.7em;
+    text-align: left;
+  }
+
+  .bookingHistoryTableBody {
+    font-family: Arial, sans-serif;
+    font-size: 1.2em;
+    text-align: left;
+  }
 
 
 /* User account section */
