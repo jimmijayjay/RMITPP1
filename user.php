@@ -1,8 +1,8 @@
 <?php include_once('includes/header.php'); ?>
 
-    <section>
+    <!-- <section>
     <a href="bookingHistory.php">Booking History</a>
-    </section>
+  </section> -->
 
      <section class="probootstrap-cover">
       <div class="container">
@@ -35,19 +35,19 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder= "<?php echo $_SESSION['firstname'];?>">
+                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder= "<?php echo $_SESSION['car_buddy_firstname'];?>">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder= "<?php echo $_SESSION['lastname'];?>">
+                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder= "<?php echo $_SESSION['car_buddy_lastname'];?>">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" palceholder= "<?php echo $_SESSION["email"];?>">
+                <input type="email" class="form-control" id="email" name="email" palceholder= "<?php echo $_SESSION["car_buddy_email"];?>">
                 <?php /*echo $_SESSION["email"];*/?>
               </div>
               <div class="form-group">

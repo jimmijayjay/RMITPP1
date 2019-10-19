@@ -18,9 +18,9 @@
     </section>
     <?php
 
-      if (isset($_SESSION[Config::get('sessions/session_name')]) && $_SESSION[Config::get('sessions/session_name')]->isLoggedIn()) {
-        $firstname = $_SESSION[Config::get('sessions/session_name')]->getFirstName();
-        $email = $_SESSION[Config::get('sessions/session_name')]->getEmail();
+      if (isset($_SESSION['car_buddy_userid'])) {
+        $firstname = $_SESSION['car_buddy_firstname'];
+        $email = $_SESSION['car_buddy_email'];
       } else {
         $firstname = "New user";
         $email = "New user";

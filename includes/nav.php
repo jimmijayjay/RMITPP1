@@ -1,13 +1,12 @@
 <?php
 
-  if (isset($_SESSION[Config::get('sessions/session_name')])) {
-    $thisUser = $_SESSION[Config::get('sessions/session_name')];
+  if (isset($_SESSION['car_buddy_userid'])) {
+    $thisUser = new User($_SESSION['car_buddy_userid']);
   } else {
     $thisUser = new User();
   }
 
 ?>
-
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
   <div class="container">
