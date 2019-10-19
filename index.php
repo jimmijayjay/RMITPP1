@@ -1,12 +1,4 @@
-<?php
-
-  include_once('includes/header.php');
-
-  if (isset($_SESSION[Config::get('sessions/session_name')])) {
-    $thisUser = $_SESSION[Config::get('sessions/session_name')];
-  }
-
-?>
+<?php include_once('includes/header.php'); ?>
 
 <section class="probootstrap-cover">
   <div class="container">

@@ -24,8 +24,8 @@
         <li class="nav-item"><a href="booking.php" class="nav-link">Make a Booking</a></li>
         <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
         <?php if ($thisUser->isLoggedIn()) { ?>
-          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="user.php" class="nav-link">Update Details</a></li>
-          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="tools/logout.php" class="nav-link">Log Out</a></li>
+          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="user.php" class="nav-link">Account</a></li>
+          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="logout.php" class="nav-link">Log Out</a></li>
         <?php } else { ?>
           <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="registration.php" class="nav-link">Sign up</a></li>
           <li class="nav-item probootstrap-cta"><a href="login.php" class="nav-link">Log In</a></li>

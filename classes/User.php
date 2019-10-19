@@ -96,11 +96,12 @@ class User
         $thisUser = $result->fetch_array();
 
         $this->setup($thisUser[0], $thisUser[1], $thisUser[2], $thisUser[3], $thisUser[4]);
+
+        $return = true;
       }
 
       $result->close();
 
-      $return = true;
     } else {
       echo $result->error;
     }
@@ -252,7 +253,8 @@ class User
   }
 
   // Find by ID
-  public function findByID($userid = null) {
+  public function findByID($userid = null)
+  {
     if ($userid) {
       if ($result = $this->_db->_conn->query("SELECT UserID, FirstName, LastName, Email FROM Users WHERE UserID = $userid")) {
         return $result->fetch_array();
@@ -264,10 +266,30 @@ class User
     return 0;
   }
 
-  public function logout() {
-    //$this->_db->delete('users_session', array('user_id', '=', $this->data()->id));
+  // Logout
+  public function logout()
+  {
     Session::delete($this->_sessionName);
-    //Cookie::delete($this->_cookieName);
+  }
+
+  // Get all bookings
+  public function getAllBookings($userid = null)
+  {
+
+    $mysqli = $this->_db->_conn;
+
+    //if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid")) {
+
+    if ($result = $mysqli->query("SELECT UserID FROM Users WHERE UserID = 1")) {
+      //return $result->fetch_all();
+      return true;
+//    } else {
+  //    return false;
+      //return array();
+    } else {
+      //printf("Error message: %s\n", $mysqli->error);
+      return $mysqli->error;
+    }
   }
 
 }

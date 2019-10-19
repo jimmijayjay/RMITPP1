@@ -62,7 +62,7 @@ h1, h2, h3, h4, h5 {
             background: rgba(255, 255, 255, 0.1); }
 
 
-            
+
     @media screen and (max-width: 768px) {
       .probootstrap-nav .probootstrap-main-nav {
         opacity: 0;
@@ -263,13 +263,13 @@ textarea {
 
 .probootstrap-section-feature {
   background-image: url(../images/hyundai_i30.jpg);
-  background-position: center center; 
+  background-position: center center;
 }
 .probootstrap-section-feature .col-md-6{
   background-color: rgba(0, 0, 0, 0.5)
 }
   .probootstrap-section-feature .probootstrap-heading {
-    color: #fff; 
+    color: #fff;
   }
   .probootstrap-section-feature .probootstrap-device {
     top: 0;
@@ -307,7 +307,7 @@ textarea {
         padding-left: 0px;
         padding-right: 0px; } }
   .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-cta a {
-    color: #fff; 
+    color: #fff;
   text-decoration: underline;}
   .probootstrap-navabr-dark .navbar-nav > .nav-item.probootstrap-cta a:hover {
   text-decoration: underline;
@@ -368,5 +368,44 @@ textarea {
     color: #28CC9E; }
 
 .probootstrap-overflow-hidden {
-  overflow: hidden; 
+  overflow: hidden;
   background-color: rgba(0, 0, 0, 0.5)}
+
+
+
+/* User account section */
+div#account_submenu {
+  margin: auto;
+  text-align: center;
+  padding-top: 20px;
+  font-size: 1.1em;
+  width: 300px;
+  height: 25px;
+}
+
+h4#booking_history_title {
+  font-weight: bold;
+  margin-left: 110px;
+}
+
+table#booking_history_table, table#booking_history_table th, table#booking_history_table td {
+  border: 1px solid black;
+}
+
+table#booking_history_table {
+  margin: auto;
+  padding: 0;
+  width: 80%;
+  height: 60%;
+  border-collapse: collapse;
+}
+
+table#booking_history_table th {
+  background-color: #ededed;
+  color: #000;
+}
+
+table#booking_history_table th, table#booking_history_table td {
+  padding: 5px 15px;
+  margin: 15px;
+}

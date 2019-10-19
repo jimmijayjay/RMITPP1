@@ -17,12 +17,16 @@
       </div>
     </section>
 
+    <div id="account_submenu">
+      <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>
+    </div>
+
     <section class="probootstrap-section">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <form action="user.php" method="post" class="probootstrap-form mb-5">
-            <?php include('tools/errors.php'); ?>
+            <?php include('includes/errors.php'); ?>
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
@@ -53,48 +57,6 @@
                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Update Details">
               </div>
             </form>
-          </div>
-
-          <div class="col-md-7 pr-md-5 pr-0">
-            <h2 class="mb-5">Our Mission</h2>
-            <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-
-            <p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-
-
-            <p>Even the all-powerful Pointing has no control about the blind texts it is an almost unorthographic life One day however a small line of blind text by the name of Lorem Ipsum decided to leave for the far World of Grammar.</p>
-
-            <p>The Big Oxmox advised her not to do so, because there were thousands of bad Commas, wild Question Marks and devious Semikoli, but the Little Blind Text didn’t listen. She packed her seven versalia, put her initial into the belt and made herself on the way.</p>
-
-            <p>When she reached the first hills of the Italic Mountains, she had a last view back on the skyline of her hometown Bookmarksgrove, the headline of Alphabet Village and the subline of her own road, the Line Lane. Pityful a rethoric question ran over her cheek, then she continued her way.</p>
-          </div>
-          <div class="col-md-5">
-            <h2 class="mb-5">Why Us</h2>
-
-            <div class="media mb-5">
-              <div class="probootstrap-icon"><span class="icon-fingerprint display-4"></span></div>
-              <div class="media-body">
-                <h5 class="mt-0">Free Bootstrap 4</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              </div>
-            </div>
-
-            <div class="media mb-4">
-              <div class="probootstrap-icon"><span class="icon-users display-4"></span></div>
-              <div class="media-body">
-                <h5 class="mt-0">For The Community</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              </div>
-            </div>
-
-            <div class="media mb-5">
-              <div class="probootstrap-icon"><span class="icon-chat display-4"></span></div>
-              <div class="media-body">
-                <h5 class="mt-0">Support Us By Sharing This to Others</h5>
-                <p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-              </div>
-            </div>
-
           </div>
         </div>
       </div>
