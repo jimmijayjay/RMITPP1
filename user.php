@@ -1,5 +1,9 @@
 <?php include_once('includes/header.php'); ?>
 
+    <section>
+    <a href="bookingHistory.php">Booking History</a>
+    </section>
+
      <section class="probootstrap-cover">
       <div class="container">
         <div class="row probootstrap-vh-75 align-items-center text-left">
