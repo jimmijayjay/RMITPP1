@@ -18,7 +18,7 @@
       $email = $db->_conn->real_escape_string(preg_replace('/\s+/', '', $_POST['email']));
 
       if ($user->forgetPassword($email)) {
-        Redirect::to('forgetpassword_access_landing.php');
+        Redirect::to('forgetpassword_success_landing.php');
       }
     } else {
       foreach($validate->errors() as $error) {

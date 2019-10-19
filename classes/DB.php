@@ -26,4 +26,5 @@ class DB
 
     return self::$_instance;
   }
+
 }

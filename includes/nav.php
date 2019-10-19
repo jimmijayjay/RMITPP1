@@ -1,13 +1,12 @@
 <?php
 
-  if (isset($_SESSION[Config::get('sessions/session_name')])) {
-    $thisUser = $_SESSION[Config::get('sessions/session_name')];
+  if (isset($_SESSION['car_buddy_userid'])) {
+    $thisUser = new User($_SESSION['car_buddy_userid']);
   } else {
     $thisUser = new User();
   }
 
 ?>
-
 
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark probootstrap-navabr-dark">
   <div class="container">
@@ -24,8 +23,8 @@
         <li class="nav-item"><a href="booking.php" class="nav-link">Make a Booking</a></li>
         <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
         <?php if ($thisUser->isLoggedIn()) { ?>
-          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="user.php" class="nav-link">Update Details</a></li>
-          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="tools/logout.php" class="nav-link">Log Out</a></li>
+          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="user.php" class="nav-link">Account</a></li>
+          <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="logout.php" class="nav-link">Log Out</a></li>
         <?php } else { ?>
           <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="registration.php" class="nav-link">Sign up</a></li>
           <li class="nav-item probootstrap-cta"><a href="login.php" class="nav-link">Log In</a></li>

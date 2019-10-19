@@ -1,7 +1,6 @@
-
 <?php include_once('includes/header.php'); ?>
 
-    <?php include_once('includes/currentBookings.php'); ?>    
+    <?php include_once('includes/currentBookings.php'); ?>
     <section class="probootstrap-cover">
       <div class="container">
         <div class="row probootstrap-vh-75 align-items-center text-left">
@@ -24,12 +23,12 @@
                 <div class="row">
                     <div class="col-md-12">
                         <form action="booking2.php" method="post" class="probootstrap-form mb-5">
-                            <?php include('tools/errors.php'); ?>
+                            <?php include('includes/errors.php'); ?>
                             <div class="form-group">
                                 <label for="carT">Choose a Vehicle Type</label>
                                 <select id="carType" name="carTy" onchange="modelFunction()">
                                     <option selected disabled>* Choose A Car Type *</option>
-                                    <?php 
+                                    <?php
                                         foreach($output_array as $key => $value){
                                             echo $key." => ".$value;
                                                     ?>
@@ -41,7 +40,7 @@
                                 <label for="carC">Choose a Vehicle</label>
                                 <select id="carChoice" name="carCh" onchange="locationFunction()">
                                     <option id="makeCarChoice" selected disabled> </option>
-                                    <?php 
+                                    <?php
                                         /* foreach($output_array as $key => $value){
                                             echo $key." => ".$value;
                                             foreach($value as $key2 => $value2){
@@ -57,7 +56,7 @@
                                 </select>
 <!--                            </div>
                             <div class="form-group">
--->                            
+-->
                                 <label for="location"> Choose your location</label>
                                 <select name="location" id="location">
                                     <!--<option selected disabled>* Pick Model First *</option> -->
@@ -89,19 +88,19 @@
                                 <label for="password2">Confirm Password</label>
                                 <input type="password" class="form-control" id="password2" name="password2">
                             </div>
--->                             
+-->
                             <div class="form-group">
                                 <input type="submit" class="btn btn-primary" id="submit" name="submit" value="Book">
                             </div>
-                          
+
                         </form>
                     </div>
                 </div>
             </div>
         </section>
-    
-    <?php include_once('tools/footer.php'); ?>  
-    
+
+
+
     <script>
 
     //////////////// function to change location on type selection //////////////////
@@ -132,7 +131,7 @@
             option.text = text;
             option.disabled = true;
             option.defaultSelected = true;
-            change.add(option, loc[1]);       
+            change.add(option, loc[1]);
 
 
             Object.keys(res).forEach(function(key) {
@@ -169,7 +168,7 @@
             }
             transport_select.setAttribute("onchange", function(){toggleSelect(transport_select_id);});*/
         }
-    
+
 
 
     //////////////// function to change location on model selection //////////////////
@@ -205,7 +204,7 @@
             option.text = text;
             option.disabled = true;
             option.defaultSelected = true;
-            change.add(option, loc[1]);      
+            change.add(option, loc[1]);
 
             var y = 0;
             while (y<x){
@@ -224,11 +223,4 @@
 
 
     </script>
-
-    <script src="js/jquery-3.2.1.slim.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/main.js"></script>
-    
-  </body>
-</html>
+<?php include_once('includes/footer.php'); ?>

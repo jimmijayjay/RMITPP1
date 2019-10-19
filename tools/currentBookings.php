@@ -25,17 +25,17 @@ function array_multi_group_by_key($input_array, $key, $remove_key = false, $flat
       // Prepare a select statement
       $sql = "SELECT VehicleTypeName, VehicleMake, VehicleModel, VehicleID, VehicleSuburb, VehicleAddress, VehicleLatitude, VehicleLongitude FROM VehicleDetails";
       //echo $sql;
-      $result = mysqli_query($db, $sql);
+      //$result = mysqli_query($db, $sql);
       //echo '<pre>'; print_r($result); echo '</pre>';
 
-      
+
 
       $carArray = array();
       $index = 0;
-      while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
+      /*while($row = mysqli_fetch_assoc($result)){ // loop to store the data in an associative array.
         $carArray[$index] = $row;
         $index++;
-      }
+      }*/
 
       //create multidimensional array
       $output_array = [];
@@ -44,7 +44,7 @@ function array_multi_group_by_key($input_array, $key, $remove_key = false, $flat
         $model = $array["VehicleModel"];
         $output_array[$array["VehicleTypeName"]][$make][$model][] = array('VehicleID'=>$array['VehicleID'],'VehicleSuburb'=>$array['VehicleSuburb'],'VehicleAddress'=>$array['VehicleAddress'],'VehicleLatitude'=>$array['VehicleLatitude'],'VehicleLongitude'=>$array['VehicleLongitude']);
         //$output_array2["VehicleTypeName"]["VehicleMake"]["VehicleModel"][] = array('VehicleLatitude'=>$array['VehicleLatitude'],'VehicleLongitude'=>$array['VehicleLongitude']);
-        
+
           //echo "<br>".$sub["VehicleTypeName"]."<br>";
           //foreach($sub as $test){
           //  unset($sub["VehicleTypeName"]);

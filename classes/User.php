@@ -10,8 +10,7 @@ class User
           $FirstName,
           $LastName,
           $Email,
-          $UserTypeID,
-          $_sessionName;
+          $UserTypeID;
 
   // Default constructor
   public function __construct($user = null)
@@ -19,21 +18,10 @@ class User
     $this->_db = DB::getInstance();
     $this->_sendMail = Email::getInstance();
 
-    $this->_sessionName = Config::get('sessions/session_name');
-
-    /*if(!$user) {
-      if (Session::exists($this->_sessionName)) {
-        $user = Session::get($this->_sessionName);
-
-        if ($this->find($user)) {
-          $this->isLoggedIn = true;
-        } else {
-          //Logout
-        }
-      }
-    } else {
-      $this->findByID($user);
-    }*/
+    if(!is_null($user)) {
+      $thisUser = $this->findByID($user);
+      $this->setup($thisUser[0], $thisUser[1], $thisUser[2], $thisUser[3], $thisUser[4]);
+    }
   }
 
   // Setup user
@@ -45,7 +33,16 @@ class User
     $this->Email = $email;
     $this->UserTypeID = $userTypeID;
 
-    Session::put($this->_sessionName, $this);
+    $this->setupSession();
+  }
+
+  // Setup SESSION variables
+  private function setupSession()
+  {
+    Session::put('car_buddy_userid', $this->getUserID());
+    Session::put('car_buddy_firstname', $this->getFirstName());
+    Session::put('car_buddy_lastname', $this->getLastName());
+    Session::put('car_buddy_email', $this->getEmail());
   }
 
   // Getters
@@ -96,11 +93,12 @@ class User
         $thisUser = $result->fetch_array();
 
         $this->setup($thisUser[0], $thisUser[1], $thisUser[2], $thisUser[3], $thisUser[4]);
+
+        $return = true;
       }
 
       $result->close();
 
-      $return = true;
     } else {
       echo $result->error;
     }
@@ -135,7 +133,9 @@ class User
           Car Buddy Team
           ';
 
-          $this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          if (!strpos($_SERVER["SERVER_NAME"], ".local")) {
+            $this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          }
 
           $return = true;
       } else {
@@ -182,7 +182,9 @@ class User
           Car Buddy Team
           ';
 
-          $this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          if (!strpos($_SERVER["SERVER_NAME"], ".local")) {
+            $this->_sendMail->sendEmail($subject, $emailMessage, $email);
+          }
 
           $return = true;
         } else {
@@ -252,9 +254,10 @@ class User
   }
 
   // Find by ID
-  public function findByID($userid = null) {
+  public function findByID($userid = null)
+  {
     if ($userid) {
-      if ($result = $this->_db->_conn->query("SELECT UserID, FirstName, LastName, Email FROM Users WHERE UserID = $userid")) {
+      if ($result = $this->_db->_conn->query("SELECT UserID, FirstName, LastName, Email, UserTypeID FROM Users WHERE Active = 1 AND UserID = $userid")) {
         return $result->fetch_array();
 
         $result->close();
@@ -264,10 +267,26 @@ class User
     return 0;
   }
 
-  public function logout() {
-    //$this->_db->delete('users_session', array('user_id', '=', $this->data()->id));
-    Session::delete($this->_sessionName);
-    //Cookie::delete($this->_cookieName);
+  // Get all bookings
+  public function getAllBookings($userid = null)
+  {
+    $mysqli = $this->_db->_conn;
+
+    if ($result = $mysqli->query("SELECT b.BookingID b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid ORDER BY b.BookingID DESC")) {
+
+      return $result;
+
+    } else {
+      return array();
+    }
   }
 
+  // Logout
+  public function logout()
+  {
+    Session::delete("car_buddy_userid");
+    Session::delete("car_buddy_firstname");
+    Session::delete("car_buddy_lastname");
+    Session::delete("car_buddy_email");
+  }
 }

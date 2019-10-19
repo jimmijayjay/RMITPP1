@@ -1,5 +1,5 @@
 <?php include_once('includes/header.php'); ?>
-  <?php include_once('tools/currentBookings.php'); ?>    
+  <?php include_once('tools/currentBookings.php'); ?>
     <section class="probootstrap-cover">
       <div class="container">
         <div class="row probootstrap-vh-75 align-items-center text-left">
@@ -52,7 +52,7 @@ Object.keys(res).forEach(function(key) {
         //console.log("VehicleLatitude" + res[key][subKey][subKey2][subKey3]["VehicleLatitude"]);
         //console.log("VehicleLongitude" + res[key][subKey][subKey2][subKey3]["VehicleLongitude"]);
         //console.log("VehicleAddress" + res[key][subKey][subKey2][subKey3]["VehicleAddress"]);
-         
+
 
         L.marker([res[key][subKey][subKey2][subKey3]["VehicleLatitude"], res[key][subKey][subKey2][subKey3]["VehicleLongitude"]]).on('click', markerOnClick).addTo(mymap)
         .bindPopup("<b>Melbourne CBD - Public Parking</b><br>" + res[key][subKey][subKey2][subKey3]['VehicleAddress'] + "<br />" + subKey + ' '+ subKey2 + '<input type="hidden" name="location" value="' + res[key][subKey][subKey2][subKey3]["VehicleID"] + '"><br><input type="submit" value="book">');
@@ -62,18 +62,19 @@ Object.keys(res).forEach(function(key) {
   });
 });
 
+
   var popup = L.popup();
   var strLong = "";
   var strLat = "";
-  
-  
+
+
   function onMapClick(e) {
     popup
     .setLatLng(e.latlng)
     .setContent("You clicked the map at " + e.latlng.toString())
     .openOn(mymap);
   }
-  
+
   /*  ONCLICK MY MARKER   */
   function markerOnClick(e)
   {
@@ -81,17 +82,9 @@ Object.keys(res).forEach(function(key) {
     strLat = e.latlng.lng;
   }
 
-  
+
   mymap.on('click', onMapClick);
-  
+
   </script>
 
-  <?php include_once('tools/footer.php'); ?>  
-  
-  
-  <script src="js/jquery-3.2.1.slim.min.js"></script>
-  <script src="js/popper.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
-  <script src="js/main.js"></script>
-  </body>
-  </html>
+  <?php include_once('includes/footer.php'); ?>
