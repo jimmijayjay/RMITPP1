@@ -1,15 +1,11 @@
 var res = {
   calstart : function () {
   // res.calstart() : show calendar for date start
-
     res.cal("start");
-    
-  
   },
 
   calend : function () {
   // res.calend() : show calendar for date end
-
     res.cal("end");
   },
 
@@ -199,9 +195,10 @@ var res = {
         // OK - Redirect to thank you page
         if (res.status==1) {
           location.href = "3d-thank-you.html";
-        }
-        // ERROR - show error
-        else {
+        }else if(res.status==2){
+          location.href = "login.php"; 
+        } else {
+            // ERROR - show error
           alert(res.message);
         }
       };
