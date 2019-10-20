@@ -144,6 +144,26 @@ class User
     return $return;
   }
 
+  // Update method
+  public function update($firstname = null, $lastname = null, $email = null, $password = null, $userid = null)
+  {
+    $return = false;
+    $mysqli = $this->_db->_conn;
+
+    $passwordHash = md5($password);
+
+    // Register the user to the database
+    if ($update = $mysqli->query("UPDATE Users SET FirstName = '$firstname', LastName = '$lastname', Email = '$email', Password = '$passwordHash' WHERE UserID = $userid")) {
+      $return = true;
+
+      $this->setup($userid, $firstname, $lastname, $email, $this->getUserTypeID());
+    } else {
+      echo $update->error;
+    }
+
+    return $return;
+  }
+
   // Forget password method
   public function forgetPassword($email = null)
   {
@@ -255,6 +275,21 @@ class User
     } else {
       return array();
     }
+  }
+
+  // Get all bookings
+  public function getBookingsForPDF()
+  {
+    $return = array();
+    $mysqli = $this->_db->_conn;
+
+    if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $this->UserID ORDER BY b.BookingID DESC")) {
+      while ($booking = $result->fetch_assoc()) {
+        $return[] = array("{$booking['BookingDate']}", "{$booking['VehicleMake']} {$booking['VehicleModel']}", "{$booking['VehicleTypeName']}", "{$booking['BookingStartTime']} - {$booking['BookingEndTime']}", "{$booking['BookingTotal']}");
+      }
+    }
+
+    return $return;
   }
 
   // Logout

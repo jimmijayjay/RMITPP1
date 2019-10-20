@@ -407,7 +407,7 @@ table#booking_history_table, table#booking_history_table th, table#booking_histo
 table#booking_history_table {
   margin: auto;
   padding: 0;
-  width: 80%;
+  width: 90%;
   height: 60%;
   border-collapse: collapse;
 }
