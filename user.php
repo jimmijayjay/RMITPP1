@@ -1,4 +1,66 @@
-<?php include_once('includes/header.php'); ?>
+<?php
+
+  require_once('includes/init.php');
+
+  $errors = array();
+
+  if (isset($_SESSION['car_buddy_userid']) && !empty($_SESSION['car_buddy_userid'])) {
+    $user = new User($_SESSION['car_buddy_userid']);
+  } else {
+    $user = new User();
+  }
+
+  if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $db = DB::getInstance();
+    $validate = new Validate();
+
+    $validate->check($_POST, array(
+      'firstName' => array('required' => true),
+      'lastName' => array('required' => true),
+      'email' => array('required' => true),
+      'password1' => array('required' => true),
+      'password2' => array('required' => true)
+    ));
+
+    if ($validate->passed()) {
+      $firstName = $db->_conn->real_escape_string($_POST['firstName']);
+      $lastName = $db->_conn->real_escape_string($_POST['lastName']);
+      $email = $db->_conn->real_escape_string(preg_replace('/\s+/', '', $_POST['email']));
+      $password1 = $db->_conn->real_escape_string($_POST['password1']);
+      $password2 = $db->_conn->real_escape_string($_POST['password2']);
+
+      if (strlen($password1) > 50) {
+          array_push($errors, "Password is too long");
+      }
+
+      if (strlen($firstName) > 100 OR strlen($lastName) > 100) {
+          array_push($errors, "First name or last name is too long");
+      }
+
+      if ($password1 != $password2) {
+          array_push($errors, "The two passwords are not the same");
+      }
+
+      if (count($errors) == 0) {
+        if ($result = $user->update($firstName, $lastName, $email, $password1, $user->getUserID())) {
+          Redirect::to('user_update_success_landing.php');
+        } else {
+          array_push($errors, "Account update failed. Please try again later.");
+        }
+      }
+    }
+
+    if (count($errors) > 0) {
+      foreach($validate->errors() as $error) {
+        array_push($errors, $error);
+      }
+    }
+
+  }
+
+  include_once('includes/header.php');
+
+?>
 
     <!-- <section>
     <a href="bookingHistory.php">Booking History</a>
@@ -35,26 +97,26 @@
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="firstName">First Name</label>
-                    <input type="text" class="form-control" id="firstName" name="firstName" placeholder= "<?php echo $_SESSION['car_buddy_firstname'];?>">
+                    <input type="text" class="form-control" id="firstName" name="firstName" value= "<?= $user->getFirstName() ?>">
                   </div>
                 </div>
                 <div class="col-md-6">
                   <div class="form-group">
                     <label for="lname">Last Name</label>
-                    <input type="text" class="form-control" id="lastName" name="lastName" placeholder= "<?php echo $_SESSION['car_buddy_lastname'];?>">
+                    <input type="text" class="form-control" id="lastName" name="lastName" value= "<?= $user->getLastName() ?>">
                   </div>
                 </div>
               </div>
               <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" name="email" palceholder= "<?php echo $_SESSION["car_buddy_email"];?>">
-                <?php /*echo $_SESSION["email"];*/?>
+                <input type="text" class="form-control" id="email" name="email" value= "<?= $user->getEmail() ?>">
               </div>
               <div class="form-group">
-              <label for="password1">Password</label>
+                <label for="password1">Password</label>
                 <input type="password" class="form-control" id="password1" name="password1">
-              </div>              <div class="form-group">
-              <label for="password2">Confirm Password</label>
+              </div>
+              <div class="form-group">
+                <label for="password2">Confirm Password</label>
                 <input type="password" class="form-control" id="password2" name="password2">
               </div>
               <div class="form-group">
