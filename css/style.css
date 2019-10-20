@@ -397,7 +397,7 @@ div#account_submenu {
 
 h4#booking_history_title {
   font-weight: bold;
-  margin-left: 110px;
+  margin-left: 55px;
 }
 
 table#booking_history_table, table#booking_history_table th, table#booking_history_table td {
@@ -420,4 +420,9 @@ table#booking_history_table th {
 table#booking_history_table th, table#booking_history_table td {
   padding: 5px 15px;
   margin: 15px;
+}
+
+img#pdf_icon {
+  position: relative;
+  top: -2px;
 }

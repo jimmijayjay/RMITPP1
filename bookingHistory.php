@@ -50,7 +50,7 @@
             <th>Vehicle&nbsp;Type</th>
             <th>Booking&nbsp;Duration</th>
             <th>Booking&nbsp;Fee</th>
-            <th>Actions</th>
+            <th>Download</th>
           </tr>
           <?php if (empty($bookings)) { ?>
           <tr>
@@ -71,7 +71,7 @@
               <td><?= $booking["VehicleTypeName"] ?></td>
               <td><?= $booking["BookingStartTime"] . ' - ' . $booking["BookingStartTime"] ?></td>
               <td>$<?= $booking["BookingTotal"] ?></td>
-              <td><a href="bookingHistoryPDF.php" target="_blank">PDF</a></td>
+              <td><a href="bookingHistoryPDF.php" target="_blank"><img src="images/pdf_icon_16_x_16.png" width="16" height="16" id="pdf_icon">&nbsp;PDF</a></td>
             </tr>
           <?php
               }
