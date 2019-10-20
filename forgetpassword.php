@@ -1,6 +1,7 @@
 <?php
 
   require_once 'includes/init.php';
+  include_once 'tools/sendemail.php';
 
   $errors = array();
 
@@ -14,10 +15,25 @@
 
     if ($validate->passed()) {
       $user = new User();
-
       $email = $db->_conn->real_escape_string(preg_replace('/\s+/', '', $_POST['email']));
+      $result = $user->forgetPassword($email);
 
-      if ($user->forgetPassword($email)) {
+      if (!empty($result)) {
+        $subject = "Car Buddy - Reset Your Password";
+        $emailMessage = '
+
+        Hi '.$result['firstname'].',
+
+        You have requested resetting your password.
+
+        Please click on the below link to reset password of your Car Buddy account:
+        http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$result['hash'].'
+
+        Kind Regards,
+        Car Buddy Team
+        ';
+
+        sendEmail($subject, $emailMessage, $email);
         Redirect::to('forgetpassword_success_landing.php');
       }
     } else {

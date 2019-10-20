@@ -1,6 +1,7 @@
 <?php
 
   require_once 'includes/init.php';
+  include_once 'tools/sendemail.php';
 
   $errors = array();
 
@@ -40,9 +41,24 @@
 
       if (count($errors) == 0) {
         $user = new User();
+        $result = $user->register($firstName, $lastName, $email, $password1);
 
-        if ($user->register($firstName, $lastName, $email, $password1)) {
+        if (!empty($result)) {
+          $subject = "Welcome to Car Buddy! Confirm your email";
+          $emailMessage = '
+
+          Hi '.$firstname.',
+
+          Please click on the below link to activate your Car Buddy account:
+          http://www.carbuddy.ga/verify.php?email='.$email.'&hash='. $result['hash'] .'
+
+          Kind Regards,
+          Car Buddy Team
+          ';
+
+          sendEmail($subject, $emailMessage, $email);
           Redirect::to('reg_success_landing.php');
+
         } else {
           array_push($errors, "Registration Failed. Please try again later.");
         }
