@@ -54,7 +54,7 @@
           </tr>
           <?php if (empty($bookings)) { ?>
           <tr>
-            <td colspan="5" style="text-align: center; font-weight: bold;">
+            <td colspan="6" style="text-align: center; font-weight: bold;">
               <br/><br/>
               No bookings found.
               <br/><br/><br/>
