@@ -10,6 +10,8 @@ class User
           $FirstName,
           $LastName,
           $Email,
+          $Hash,
+          $ForgetPasswordHash,
           $UserTypeID;
 
   // Default constructor
@@ -71,6 +73,16 @@ class User
     return $this->UserTypeID;
   }
 
+  public function getForgetPasswordHash()
+  {
+    return $this->ForgetPasswordHash;
+  }
+
+  public function getHash()
+  {
+    return $this->Hash;
+  }
+
   // Check user logged in status
   public function isLoggedIn()
   {
@@ -109,35 +121,19 @@ class User
   // Register method
   public function register($firstname = null, $lastname = null, $email = null, $password = null)
   {
-    $return = false;
-    $hash = md5(rand(0,1000));
-    $passwordHash = md5($password);
-
+    $return = array();
     $mysqli = $this->_db->_conn;
 
     // Check if this email already exist
     $result = $mysqli->query("SELECT UserID FROM Users WHERE Email = '$email'");
 
     if ($result->num_rows == 0) {
+      $hash = md5(rand(0,1000));
+      $passwordHash = md5($password);
+
+      // Register the user to the database
       if ($insertResult = $mysqli->query("INSERT INTO Users (FirstName, LastName, Email, Password, Hash, UserTypeID) VALUES ('$firstname', '$lastname', '$email', '$passwordHash', '$hash', 2)")) {
-
-          $subject = "Welcome to Car Buddy! Confirm your email";
-          $emailMessage = '
-
-          Hi '.$firstname.',
-
-          Please click on the below link to activate your Car Buddy account:
-          http://www.carbuddy.ga/verify.php?email='.$email.'&hash='.$hash.'
-
-          Kind Regards,
-          Car Buddy Team
-          ';
-
-          if (!strpos($_SERVER["SERVER_NAME"], ".local")) {
-            $this->_sendMail->sendEmail($subject, $emailMessage, $email);
-          }
-
-          $return = true;
+          $return['hash'] = $hash;
       } else {
         echo $insertResult->error;
       }
@@ -151,10 +147,7 @@ class User
   // Forget password method
   public function forgetPassword($email = null)
   {
-    $return = false;
-    $hash = md5(rand(0,1000));
-    $passwordHash = md5($password);
-
+    $return = array();
     $mysqli = $this->_db->_conn;
 
     // Get other details for this user
@@ -168,25 +161,8 @@ class User
         $firstName = $thisUser[1];
 
         if ($update = $mysqli->query("UPDATE Users SET ForgetPasswordHash = '$hash' WHERE UserID = $userid")) {
-          $subject = "Car Buddy - Reset Your Password";
-          $emailMessage = '
-
-          Hi '.$firstName.',
-
-          You have requested resetting your password.
-
-          Please click on the below link to reset password of your Car Buddy account:
-          http://www.carbuddy.ga/resetpassword.php?email='.$email.'&forgetpassword_hash='.$hash.'
-
-          Kind Regards,
-          Car Buddy Team
-          ';
-
-          if (!strpos($_SERVER["SERVER_NAME"], ".local")) {
-            $this->_sendMail->sendEmail($subject, $emailMessage, $email);
-          }
-
-          $return = true;
+          $return['firstname'] = $firstname;
+          $return['hash'] = $hash;
         } else {
           echo $update->error;
         }
