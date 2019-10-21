@@ -2,11 +2,18 @@
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
-    
+  
     // INIT
     require __DIR__ . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "2a-config.php";
     require PATH_LIB . "2b-lib-res.php";
+    require_once 'includes/init.php';
 
+    $errors = array();
+
+    $payment = new Payment();
+    $FeeValue = $payment->CalFee($_SESSION['start'], $_SESSION['end'], $_SESSION['vehicle_id']);
+    
+    
     
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $reslib = new Res();
@@ -29,7 +36,6 @@
   <link rel="stylesheet" href="./css/checkoutstyles.css">
 </head>
 <body>
-    <h3>Booking Details</h3>
      
     
     
@@ -110,9 +116,12 @@
       </h4>
       <p>Booking Start Time</a> <span class="price"><?php echo $_SESSION['start']?></span></p>
       <p>Booking End Time</a> <span class="price"><?php echo $_SESSION['end'] ?></span></p>
+      <p>Fee Per Hour</a> <span class="price"><?php echo "$".$FeeValue[2] ?></span></p>
+      <p>Number of Hours</a> <span class="price"><?php echo $FeeValue[1] ?></span></p>
+
 
       <hr>
-      <p>Total <span class="price" style="color:black"><b>$30</b></span></p>
+      <p>Total <span class="price" style="color:black"><b><?php echo $FeeValue[0];?></b></span></p>
     </div>
   </div>
 </div>
