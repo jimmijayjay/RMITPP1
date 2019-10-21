@@ -1,5 +1,5 @@
 <?php include_once('includes/header.php'); ?>
-  <?php include_once('tools/currentBookings.php'); ?>
+<?php include_once('includes/currentBookings.php'); ?>
     <section class="probootstrap-cover">
       <div class="container">
         <div class="row probootstrap-vh-75 align-items-center text-left">
