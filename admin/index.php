@@ -1,10 +1,6 @@
 <?php include_once('includes/header.php'); ?>
 
 
-<p>
-  <br/>
-  Welcome to CarBuddy Admin Console
-  <br/><br/>
-</p>
+<h1 id="homepage">Welcome to CarBuddy Admin Console.</h1>
 
 <?php include_once('includes/footer.php'); ?>

@@ -268,7 +268,7 @@ class User
   {
     $mysqli = $this->_db->_conn;
 
-    if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid ORDER BY b.BookingID DESC")) {
+    if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid AND b.Active = 1 ORDER BY b.BookingID DESC")) {
 
       return $result;
 
