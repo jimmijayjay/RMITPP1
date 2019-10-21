@@ -106,11 +106,21 @@ class Res {
       return false;
     }
     
-    //$vehicle_id = 6;
+    //Check whether the user has logined
+//    session_start();
+//    if ( !isset($_SESSION["carbuddy"]) || (isset($_SESSION["carbuddy"]) && !$_SESSION["carbuddy"]->isLoggedIn())) {
+//        return 2;
+//    }
+    return 1;
+        
+
     // Process reservation
-    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
-    $cond = [$start, $end, $vehicle_id];
-    return $this->exec($sql, $cond);
+//    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
+//    $cond = [$start, $end, $vehicle_id];
+//    echo "This code is running";
+//    return $this->exec($sql, $cond);
+    //return 2;
+    
   }
 
   /* [GET RESERVATION] */
