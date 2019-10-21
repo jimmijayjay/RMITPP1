@@ -194,7 +194,7 @@ var res = {
         var res = JSON.parse(this.response);
         // OK - Redirect to thank you page
         if (res.status==1) {
-          location.href = "3d-thank-you.html";
+          location.href = "bookingcheckout.php";
         }else if(res.status==2){
           location.href = "login.php"; 
         } else {
