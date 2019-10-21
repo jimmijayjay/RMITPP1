@@ -21,6 +21,8 @@
         } else {
           Redirect::to('index.php');
         }
+      } else {
+        array_push($errors, "Your username or password is incorrect.");
       }
     } else {
       foreach($validate->errors() as $error) {
