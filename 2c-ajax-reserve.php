@@ -248,7 +248,7 @@ if ($_POST['req']) { switch ($_POST['req']) {
     // Save reservation to database
     $startDateTime = $_POST['start']." ".$_POST['slot_start'].":00";
     $endDateTime = $_POST['end']." ".$_POST['slot_end'].":00";
-    $pass = $reslib->bookRange(
+    $pass = $reslib->bookRangeValidate(
       $_POST['name'], $_POST['email'], $_POST['tel'], $startDateTime, $endDateTime, 
       $_POST['notes'] ? $_POST['notes'] : "",  $_POST['vehicle_id']
     );
@@ -270,12 +270,12 @@ if ($_POST['req']) { switch ($_POST['req']) {
         "message" => "User has not login"
       ]);
       break;   
-    }else if($pass==TRUE || $pass==FALSE){
+    }
       echo json_encode([     
         "status" => $pass ? 1 : 0,
         "message" => $pass ? "OK" : $reslib->error
       ]);
       break;
-    }
+    
 
 }}
