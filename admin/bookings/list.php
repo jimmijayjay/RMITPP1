@@ -32,7 +32,7 @@
     ?>
   </p>
 <?php } ?>
-
+<h1>All Bookings</h1>
 <table class="list_table">
   <tr>
     <th>Vehicle</th>

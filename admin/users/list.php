@@ -45,6 +45,7 @@
   </p>
 <?php } ?>
 
+<h1>All Users</h1>
 <table class="list_table">
   <tr>
     <th>Name</th>
