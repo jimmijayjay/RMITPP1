@@ -25,8 +25,8 @@
         case "edit":
           echo "Booking updated successfully.";
           break;
-        case "editPassword":
-          echo "Password updated successfully.";
+        case "delete":
+          echo "Booking deleted successfully.";
           break;
       }
     ?>
