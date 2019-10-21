@@ -45,7 +45,8 @@
   </tr>
   <?php
     if ($result = mysqli_query($db, $sql)) {
-      while ($booking = mysqli_fetch_assoc($result)) {
+      if ($result->num_rows > 0) {
+        while ($booking = mysqli_fetch_assoc($result)) {
   ?>
     <tr>
       <td><?= $booking['VehicleMake'] . ' ' . $booking['VehicleModel'] ?></td>
@@ -56,7 +57,7 @@
       <td>$<?= $booking['BookingTotal'] ?></td>
       <td>
         <a href="edit.php?BookingID=<?= $booking['BookingID']?>">Edit</a>&nbsp;|&nbsp;
-        <a href="javascript: deleteBooking(<?php $booking['BookingID'] ?>)">Delete</a>
+        <a href="javascript: deleteBooking(<?= $booking['BookingID'] ?>)">Delete</a>
       </td>
     </tr>
   <?php
@@ -64,13 +65,16 @@
     } else {
   ?>
     <tr>
-      <td colspan="7">
+      <td colspan="7" style="text-align: center;">
         <br/>
         No records found.
         <br/><br/><br/>
       </td>
     </tr>
-  <?php } ?>
+  <?php
+      }
+    }
+  ?>
 </table>
 
 <?php
