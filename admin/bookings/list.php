@@ -19,8 +19,8 @@
         case "activate":
           echo "Booking activated successfully.";
           break;
-        case "deactivate":
-          echo "Booking deactivated successfully.";
+        case "add":
+          echo "Booking added successfully.";
           break;
         case "edit":
           echo "Booking updated successfully.";
@@ -32,7 +32,10 @@
     ?>
   </p>
 <?php } ?>
-<h1>All Bookings</h1>
+<div class="admin_section_title_div">
+  <h1>All Bookings</h1>
+  <a href="add.php" class="admin_add_link">Add Booking</a>
+</div>
 <table class="list_table">
   <tr>
     <th>Vehicle</th>
@@ -49,7 +52,7 @@
         while ($booking = mysqli_fetch_assoc($result)) {
   ?>
     <tr>
-      <td><?= $booking['VehicleMake'] . ' ' . $booking['VehicleModel'] ?></td>
+      <td><?= $booking['VehicleMake'] . ' ' . $booking['VehicleModel'] . ' (' . $booking['VehicleTypeName'] . ')' ?></td>
       <td><?= $booking['FirstName'] . ' ' . $booking['LastName'] ?></td>
       <td><?= $booking['BookingDate'] ?></td>
       <td><?= $booking['BookingStartTime'] ?></td>

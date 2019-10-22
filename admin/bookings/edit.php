@@ -4,6 +4,9 @@
   $bookingid = 0;
   $vehicleid = $bookingDate = $bookingStartTime = $bookingEndTime = $bookingTotal = $userid = "";
 
+  $users = mysqli_query($db, "SELECT UserID, FirstName, LastName FROM Users WHERE UserTypeID = 2 AND Active = 1 ORDER BY LastName");
+  $getAllVehicleTypes = mysqli_query($db, "SELECT VehicleTypeName FROM VehicleDetails GROUP BY VehicleTypeName");
+
   if ($stmt = mysqli_prepare($db, "SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, u.FirstName, u.LastName, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN Users u ON b.UserID = u.UserID INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.BookingID = ?")) {
 
     /* bind parameters for markers */
@@ -12,17 +15,33 @@
     /* execute query */
     mysqli_stmt_execute($stmt);
 
+    /* store the result */
+    mysqli_stmt_store_result($stmt);
+
     /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $bookingid, $vehicleid, $bookingTotal, $bookingDate, $bookingStartTime, $bookingEndTime, $userid, $firstname, $lastname, $vehicleTypeName, $vehicleMake, $vehicleModel);
+    mysqli_stmt_bind_result($stmt, $bookingid, $vehicleid, $bookingTotal, $bookingDate, $bookingStartTime, $bookingEndTime, $userid, $firstname, $lastname, $selectedVehicleTypeName, $vehicleMake, $selectedVehicleModel);
 
     /* fetch value */
     mysqli_stmt_fetch($stmt);
 
     $bookingStartDateTime = new DateTime($bookingStartTime);
     $bookingEndDateTime = new DateTime($bookingEndTime);
+
+    if ($result = mysqli_prepare($db, "SELECT VehicleMake, VehicleModel FROM VehicleDetails WHERE VehicleTypeName = ?")) {
+      mysqli_stmt_bind_param($result, "s", $selectedVehicleTypeName);
+      mysqli_stmt_execute($result);
+      $getAllVehicleModels = mysqli_stmt_get_result($result);
+    }
+
+    if ($result2 = mysqli_prepare($db, "SELECT VehicleID, VehicleAddress FROM VehicleDetails WHERE VehicleModel = ?")) {
+      mysqli_stmt_bind_param($result2, "s", $selectedVehicleModel);
+      mysqli_stmt_execute($result2);
+      $getAllVehicleAddresses = mysqli_stmt_get_result($result2);
+    }
   }
 ?>
 
+<script src="/admin/js/bookingForm.js"></script>
 <script>
   var bookingStartDate = "<?= $bookingStartDateTime->format('d/m/Y') ?>";
   var bookingEndDate = "<?= $bookingEndDateTime->format('d/m/Y') ?>";
@@ -46,58 +65,6 @@
       }
     });
   });
-
-  function checkHour(hour) {
-    if (hour < 0 || hour > 23) {
-      return false;
-    }
-
-    return true;
-  }
-
-  function checkMinute(minute) {
-    if (minute < 0 || minute > 59) {
-      return false;
-    }
-
-    return true;
-  }
-
-  function checkForm() {
-    var error = "";
-    var startHour = $("#bookingStartDateHour").val();
-    var startMin = $("#bookingStartDateMinute").val();
-    var endHour = $("#bookingEndDateHour").val();
-    var endMin = $("#bookingEndDateMinute").val();
-
-    if ($("#bookingStartDate").val() == "") {
-      error += "You must select a booking start date.<br/>";
-    }
-
-    if ((startHour == "" || (startHour != "" && !checkHour(startHour))) || (startMin == "" || (startMin != "" && !checkMinute(startMin)))) {
-      error += "You must enter a valid booking start time.<br/>";
-    }
-
-    if ($("#bookingEndDate").val() == "") {
-      error += "You must select a booking end date.<br/>";
-    }
-
-    if ((endHour == "" || (endHour != "" && !checkHour(endHour))) || (endMin == "" || (endMin != "" && !checkMinute(endMin)))) {
-      error += "You must enter a valid booking end time.<br/>";
-    }
-
-    if ($("#bookingTotal").val() == "") {
-      error += "You must enter a booking total.";
-    }
-
-    if (error != "") {
-      $("#errorDiv").html(error);
-      return false;
-    }
-
-    return true;
-  }
-
 </script>
 
 <h1>Edit Booking</h1>
@@ -106,11 +73,58 @@
   <form action="updateBooking.php" method="post" id="bookingform">
     <tr>
       <td>Customer:</td>
-      <td><?= $firstname ?> <?= $lastname ?></td>
+      <td>
+        <select name="userid">
+          <?php
+            if ($users) {
+              while ($row = mysqli_fetch_assoc($users)) {
+          ?>
+                <option value="<?= $row['UserID'] ?>" <?php if ($row['UserID'] == $userid) { ?>selected<?php } ?>><?= $row['FirstName'] . ' ' . $row['LastName'] ?></option>
+          <?php
+              }
+            }
+          ?>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>Vehicle:</td>
-      <td><?= $vehicleMake ?> <?= $vehicleModel ?> (<?= $vehicleTypeName ?>)</td>
+      <td>
+        <select id="vehicleType" name="vehicleType" onchange="getVehicleModel(this.options[this.selectedIndex].value)">
+          <option value="">Please select a Vehicle Type</option>
+          <?php
+            if ($getAllVehicleTypes) {
+              while ($row = mysqli_fetch_assoc($getAllVehicleTypes)) {
+          ?>
+                <option value="<?= $row['VehicleTypeName'] ?>" <?php if ($row['VehicleTypeName'] == $selectedVehicleTypeName) { ?>selected<?php } ?> ><?= $row['VehicleTypeName'] ?></option>
+          <?php
+              }
+            }
+          ?>
+        </select>
+        <br/>
+        <select id="vehicleModel" name="vehicleModel" onchange="getVehicleAddress(this.options[this.selectedIndex].value)">
+          <option value="">Please select a Vehicle Model</option>
+          <?php
+            while ($row = mysqli_fetch_assoc($getAllVehicleModels)) {
+          ?>
+                <option value="<?= $row['VehicleModel'] ?>" <?php if ($row['VehicleModel'] == $selectedVehicleModel) { ?>selected<?php } ?> ><?= $row['VehicleMake'] . ' ' . $row['VehicleModel'] ?></option>
+          <?php
+            }
+          ?>
+        </select>
+        <br/>
+        <select id="vehicleid" name="vehicleid">
+          <option value="">Please select a vehicle address</option>
+          <?php
+            while ($row = mysqli_fetch_assoc($getAllVehicleAddresses)) {
+          ?>
+                <option value="<?= $row['VehicleID'] ?>" <?php if ($row['VehicleID'] == $vehicleid) { ?>selected<?php } ?> ><?= $row['VehicleAddress'] ?></option>
+          <?php
+            }
+          ?>
+        </select>
+      </td>
     </tr>
     <tr>
       <td>Booking Start Time (24 hr):</td>
