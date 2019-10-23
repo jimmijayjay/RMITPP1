@@ -34,7 +34,7 @@
             
         $pass = $reslib->bookRange(
         "", "", "", $start, $end, 
-        "",  $vehicle_id);
+        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee, $FeePerHour, $Hours, $TotalFee);
     }
     
     

@@ -130,7 +130,7 @@ class Res {
   }
 
   
-   function bookRange ($name, $email, $tel, $start, $end, $notes="", $vehicle_id){
+   function bookRange ($name, $email, $tel, $start, $end, $notes="", $vehicle_id, $FeePerHour, $Hours, $TotalFee){
   // bookRange() : reserve for the date range
 
     // Check if customer already booked within the date range
@@ -143,10 +143,10 @@ class Res {
 //    }
     
     // Process reservation
-    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
-    $cond = [$start, $end, $vehicle_id];
+    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID`, `FeePerHour`, `Hours`, `BookingTotal` ) VALUES (?,?,?,?,?,?)";
+    $cond = [$start, $end, $vehicle_id, $FeePerHour, $Hours, $TotalFee];
     $reult = $this->exec($sql, $cond);
-    return None;
+    return Null;
 
     
   }
