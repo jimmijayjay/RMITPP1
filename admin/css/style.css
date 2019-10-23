@@ -127,6 +127,10 @@ input, select {
   width: 50px;
 }
 
+.formField_text_large {
+  width: 200px;
+}
+
 button {
   width: 100px;
   height: 30px;

@@ -160,6 +160,10 @@
 <?php
   if ($stmt)
     mysqli_stmt_close($stmt);
+  if ($result)
+    mysqli_stmt_close($result);
+  if ($result2)
+    mysqli_stmt_close($result2);
 
   include_once($_SERVER["DOCUMENT_ROOT"] . '/admin/includes/footer.php');
 ?>
