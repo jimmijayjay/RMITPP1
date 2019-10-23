@@ -146,8 +146,11 @@ class Res {
     $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID`, `FeePerHour`, `Hours`, `BookingTotal` ) VALUES (?,?,?,?,?,?)";
     $cond = [$start, $end, $vehicle_id, $FeePerHour, $Hours, $TotalFee];
     $reult = $this->exec($sql, $cond);
-    return Null;
-
+    if($reult){
+        return True;
+    }
+    
+    return false;
     
   }
   /* [GET RESERVATION] */

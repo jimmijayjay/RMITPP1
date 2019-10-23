@@ -34,8 +34,13 @@
             
         $pass = $reslib->bookRange(
         "", "", "", $start, $end, 
-        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee, $FeePerHour, $Hours, $TotalFee);
+        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee, $FeePerHour, $Hours, $TotalFee);       
+            
+        if($pass){
+            Redirect::to('3d-thank-you.html');
+        }
     }
+
     
     
  ?>   
