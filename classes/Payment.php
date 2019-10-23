@@ -41,44 +41,54 @@ class Payment
 
     Session::put($this->_sessionName, $this);
   }
+  
+     public function calHours($start, $end){
+          //count the number of objects within the periods
 
-
-  // Login method
-  public function CalFee($start, $end, $vehicle_id)
- {
-     $mysqli = $this->_db->_conn; 
      
-     //Get vehicle type name     
-     $sql = "SELECT VehicleTypeName FROM VehicleDetails WHERE VehicleID = '$vehicle_id' ";   
-     if($result = $mysqli->query($sql)->fetch_object()->VehicleTypeName){
-            $VehicleType = $result;
-               
+//    $start = new \DateTime($start);
+//    $end = new \DateTime($end);
+//
+//    //determine what interval should be used - can change to weeks, months, etc
+//    $interval = new \DateInterval('PT1H');
+//
+//    //create periods every hour between the two dates
+//    $periods = new \DatePeriod($start, $interval, $end);
+//
+//    //count the number of objects within the periods
+//    $hours = iterator_count($periods);
+      
+        $datetime1 = new DateTime($start);
+        $datetime2 = new DateTime($end);
+        $diff = $datetime2->diff($datetime1);
+        $hours = round($diff->s / 3600 + $diff->i / 60 + $diff->h + $diff->days * 24, 2);
+        return $hours;
+
      }
-        
-     $sql = "SELECT BookingFee FROM BookingRates WHERE VehicleTypeName = '$VehicleType' ";   
-     if($result = $mysqli->query($sql)->fetch_object()->BookingFee){
-        
+     
+     public function getFeePerHour($vehicle_id){
+        $mysqli = $this->_db->_conn; 
+             //Get vehicle type name     
+        $sql = "SELECT VehicleTypeName FROM VehicleDetails WHERE VehicleID = '$vehicle_id' ";   
+        if($result = $mysqli->query($sql)->fetch_object()->VehicleTypeName){
+               $VehicleType = $result;
+
+        }
+        $sql = "SELECT BookingFee FROM BookingRates WHERE VehicleTypeName = '$VehicleType' ";   
+        if($result = $mysqli->query($sql)->fetch_object()->BookingFee){
             $VehicleFeePerHour = $result;
-                    
-                
+        }
+        return $VehicleFeePerHour;
      }
-     
 
-     
-     
-    $start = new \DateTime($start);
-    $end = new \DateTime($end);
-
-    //determine what interval should be used - can change to weeks, months, etc
-    $interval = new \DateInterval('PT1H');
-
-    //create periods every hour between the two dates
-    $periods = new \DatePeriod($start, $interval, $end);
-
-    //count the number of objects within the periods
-    $hours = iterator_count($periods);
-     
-     return [$VehicleFeePerHour*$hours, $hours, $VehicleFeePerHour];
+     public function calFee($start, $end, $vehicle_id)
+ {
+         
+    $VehicleFeePerHour = $this->getFeePerHour($vehicle_id);
+    $hours = $this->calHours($start, $end); 
+    $TotalFee = $VehicleFeePerHour*$hours;
+         
+    return $TotalFee;
         
   }
 
