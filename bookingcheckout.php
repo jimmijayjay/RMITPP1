@@ -9,24 +9,32 @@
     require_once 'includes/init.php';
 
     $errors = array();
+    
+    $start = $_SESSION['start'];
+    $end = $_SESSION['end'];
+    $vehicle_id = $_SESSION['vehicle_id'];
 
     $payment = new Payment();
-    $FeeValue = $payment->CalFee($_SESSION['start'], $_SESSION['end'], $_SESSION['vehicle_id']);
-    
-    
-    
+    $Hours = $payment->calHours($start, $end);
+    $FeePerHour = $payment->getFeePerHour($vehicle_id);
+    $TotalFee = $payment->calFee($start, $end, $vehicle_id);
+
     if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $reslib = new Res();
 
-        
         $start = $_SESSION['start'];
         $end = $_SESSION['end'];
         $vehicle_id = $_SESSION['vehicle_id'];
-      
-      
-      $pass = $reslib->bookRange(
-      "", "", "", $start, $end, 
-      "",  $vehicle_id);
+        $payment = new Payment();
+        $Hours = $payment->calHours($start, $end);
+        $FeePerHour = $payment->getFeePerHour($vehicle_id);
+        $TotalFee = $payment->calFee($start, $end, $vehicle_id);
+        
+        //, $FeePerHour, $Hours, $TotalFee
+            
+        $pass = $reslib->bookRange(
+        "", "", "", $start, $end, 
+        "",  $vehicle_id);
     }
     
     
@@ -47,8 +55,8 @@
         <div class="row">
           <div class="col-50">
             <h3>Billing Address</h3>
-            <label for="fname"><i class="fa fa-user"></i> Full Name</label>
-            <input type="text" id="fname" name="firstname" placeholder="John M. Doe">
+            <label for="fullname"><i class="fa fa-user"></i> Full Name</label>
+            <input type="text" id="fullname" name="fullname" placeholder="John M. Doe">
             <label for="email"><i class="fa fa-envelope"></i> Email</label>
             <input type="text" id="email" name="email" placeholder="john@example.com">
             <label for="adr"><i class="fa fa-address-card-o"></i> Address</label>
@@ -78,7 +86,7 @@
               <i class="fa fa-cc-discover" style="color:orange;"></i>
             </div>
             <label for="cname">Name on Card</label>
-            <input type="text" id="cname" name="cardname" placeholder="John More Doe">
+            <input type="text" id="cardname" name="cardname" placeholder="John More Doe">
             <label for="ccnum">Credit card number</label>
             <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
             <label for="expmonth">Exp Month</label>
@@ -116,12 +124,12 @@
       </h4>
       <p>Booking Start Time</a> <span class="price"><?php echo $_SESSION['start']?></span></p>
       <p>Booking End Time</a> <span class="price"><?php echo $_SESSION['end'] ?></span></p>
-      <p>Fee Per Hour</a> <span class="price"><?php echo "$".$FeeValue[2] ?></span></p>
-      <p>Number of Hours</a> <span class="price"><?php echo $FeeValue[1] ?></span></p>
+      <p>Fee Per Hour</a> <span class="price"><?php echo "$".$FeePerHour ?></span></p>
+      <p>Number of Hours</a> <span class="price"><?php echo $Hours ?></span></p>
 
 
       <hr>
-      <p>Total <span class="price" style="color:black"><b><?php echo $FeeValue[0];?></b></span></p>
+      <p>Total <span class="price" style="color:black"><b><?php echo "$".$TotalFee;?></b></span></p>
     </div>
   </div>
 </div>
