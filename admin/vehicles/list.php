@@ -61,7 +61,7 @@
     } else {
   ?>
     <tr>
-      <td colspan="7" style="text-align: center;">
+      <td colspan="5" style="text-align: center;">
         <br/>
         No records found.
         <br/><br/><br/>
