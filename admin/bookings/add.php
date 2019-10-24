@@ -96,7 +96,8 @@
           <option value="00:30:00">12:30 AM</option>
           <?php for ($i = 0; $i < 2; $i++) { ?>
             <?php for ($j = 1; $j <= 11; $j++) { ?>
-              <option value="<?= formatBookingTime($j, true, $i) ?>"><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
+              <?php $firstTime = formatBookingTime($j, true, $i); ?>
+              <option value="<?= $firstTime ?>" <?php if ($firstTime == "09:00:00") { ?>selected<?php } ?>><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
               <option value="<?= formatBookingTime($j, false, $i) ?>"><?= $j . ":30 " ?><?=($i == 0) ? "AM" : "PM" ?></option>
 
               <?php if ($j == 11 && $i == 0) { ?>
@@ -117,7 +118,8 @@
           <option value="00:30:00">12:30 AM</option>
           <?php for ($i = 0; $i < 2; $i++) { ?>
             <?php for ($j = 1; $j <= 11; $j++) { ?>
-              <option value="<?= formatBookingTime($j, true, $i) ?>"><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
+              <?php $firstTime = formatBookingTime($j, true, $i); ?>
+              <option value="<?= $firstTime ?>" <?php if ($firstTime == "15:00:00") { ?>selected<?php } ?>><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
               <option value="<?= formatBookingTime($j, false, $i) ?>"><?= $j . ":30 " ?><?=($i == 0) ? "AM" : "PM" ?></option>
 
               <?php if ($j == 11 && $i == 0) { ?>
