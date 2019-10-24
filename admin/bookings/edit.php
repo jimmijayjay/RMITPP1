@@ -27,6 +27,9 @@
     $bookingStartDateTime = new DateTime($bookingStartTime);
     $bookingEndDateTime = new DateTime($bookingEndTime);
 
+    $bookingStartTime = $bookingStartDateTime->format('H:i:s');
+    $bookingEndTime = $bookingEndDateTime->format('H:i:s');
+
     if ($result = mysqli_prepare($db, "SELECT VehicleMake, VehicleModel FROM VehicleDetails WHERE VehicleTypeName = ?")) {
       mysqli_stmt_bind_param($result, "s", $selectedVehicleTypeName);
       mysqli_stmt_execute($result);
@@ -38,6 +41,23 @@
       mysqli_stmt_execute($result2);
       $getAllVehicleAddresses = mysqli_stmt_get_result($result2);
     }
+  }
+
+  function formatBookingTime($value, $onHour, $isAM) {
+    if ($isAM == 0) {
+      if ($value < 10)
+        $value = "0" . $value;
+    } else {
+      $value += 12;
+    }
+
+    if ($onHour) {
+      $minute = ":00:00";
+    } else {
+      $minute = ":30:00";
+    }
+
+    return $value . $minute;
   }
 ?>
 
@@ -130,16 +150,46 @@
       <td>Booking Start Time (24 hr):</td>
       <td>
         <input type="text" id="bookingStartDate" name="bookingStartDate" value="<?= $bookingStartDateTime->format('d/m/Y') ?>" class="formField_date">&nbsp;&nbsp;&nbsp;
-        <input type="text" id="bookingStartDateHour" name="bookingStartDateHour" value="<?= $bookingStartDateTime->format('H') ?>" class="formField_time">&nbsp;&nbsp;:&nbsp;
-        <input type="text" id="bookingStartDateMinute" name="bookingStartDateMinute" value="<?= $bookingStartDateTime->format('i') ?>" class="formField_time">
+        <select id="bookingStartTime" name="bookingStartTime">
+          <option value="00:00:00">midnight</option>
+          <option value="00:30:00">12:30 AM</option>
+          <?php for ($i = 0; $i < 2; $i++) { ?>
+            <?php for ($j = 1; $j <= 11; $j++) { ?>
+              <?php $firstTime = formatBookingTime($j, true, $i); ?>
+              <?php $seondTime = formatBookingTime($j, false, $i); ?>
+              <option value="<?= $firstTime ?>" <?php if ($firstTime == $bookingStartTime) { ?>selected<?php } ?>><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
+              <option value="<?= $seondTime ?>" <?php if ($seondTime == $bookingStartTime) { ?>selected<?php } ?>><?= $j . ":30 " ?><?=($i == 0) ? "AM" : "PM" ?></option>
+
+              <?php if ($j == 11 && $i == 0) { ?>
+                <option value="12:00:00">noon</option>
+                <option value="12:30:00">12:30 PM</option>
+              <?php } ?>
+            <?php } ?>
+          <?php } ?>
+        </select>
       </td>
     </tr>
     <tr>
       <td>Booking End Time (24 hr):</td>
       <td>
         <input type="text" id="bookingEndDate" name="bookingEndDate" value="<?= $bookingEndDateTime->format('d/m/Y') ?>" class="formField_date">&nbsp;&nbsp;&nbsp;
-        <input type="text" id="bookingEndDateHour" name="bookingEndDateHour" value="<?= $bookingEndDateTime->format('H') ?>" class="formField_time">&nbsp;&nbsp;:&nbsp;
-        <input type="text" id="bookingEndDateMinute" name="bookingEndDateMinute" value="<?= $bookingEndDateTime->format('i') ?>" class="formField_time">
+        <select id="bookingEndTime" name="bookingEndTime">
+          <option value="00:00:00">midnight</option>
+          <option value="00:30:00">12:30 AM</option>
+          <?php for ($i = 0; $i < 2; $i++) { ?>
+            <?php for ($j = 1; $j <= 11; $j++) { ?>
+              <?php $firstTime = formatBookingTime($j, true, $i); ?>
+              <?php $seondTime = formatBookingTime($j, false, $i); ?>
+              <option value="<?= $firstTime ?>" <?php if ($firstTime == $bookingEndTime) { ?>selected<?php } ?>><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
+              <option value="<?= $seondTime ?>" <?php if ($seondTime == $bookingEndTime) { ?>selected<?php } ?>><?= $j . ":30 " ?><?=($i == 0) ? "AM" : "PM" ?></option>
+
+              <?php if ($j == 11 && $i == 0) { ?>
+                <option value="12:00:00">noon</option>
+                <option value="12:30:00">12:30 PM</option>
+              <?php } ?>
+            <?php } ?>
+          <?php } ?>
+        </select>
       </td>
     </tr>
     <tr>
