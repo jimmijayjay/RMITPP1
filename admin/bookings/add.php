@@ -4,6 +4,23 @@
 
   $users = mysqli_query($db, "SELECT UserID, FirstName, LastName FROM Users WHERE UserTypeID = 2 AND Active = 1 ORDER BY LastName");
 
+  function formatBookingTime($value, $onHour, $isAM) {
+    if ($isAM == 0) {
+      if ($value < 10)
+        $value = "0" . $value;
+    } else {
+      $value += 12;
+    }
+
+    if ($onHour) {
+      $minute = ":00:00";
+    } else {
+      $minute = ":30:00";
+    }
+
+    return $value . $minute;
+  }
+
 ?>
 
 <script src="/admin/js/bookingForm.js"></script>
@@ -75,16 +92,42 @@
       <td>Booking Start Time (24 hr):</td>
       <td>
         <input type="text" id="bookingStartDate" name="bookingStartDate" value="" class="formField_date">&nbsp;&nbsp;&nbsp;
-        <input type="text" id="bookingStartDateHour" name="bookingStartDateHour" value="" class="formField_time">&nbsp;&nbsp;:&nbsp;
-        <input type="text" id="bookingStartDateMinute" name="bookingStartDateMinute" value="" class="formField_time">
+        <select id="bookingStartTime" name="bookingStartTime">
+          <option value="00:00:00">midnight</option>
+          <option value="00:30:00">12:30 AM</option>
+          <?php for ($i = 0; $i < 2; $i++) { ?>
+            <?php for ($j = 1; $j <= 11; $j++) { ?>
+              <option value="<?= formatBookingTime($j, true, $i) ?>"><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
+              <option value="<?= formatBookingTime($j, false, $i) ?>"><?= $j . ":30 " ?><?=($i == 0) ? "AM" : "PM" ?></option>
+
+              <?php if ($j == 11 && $i == 0) { ?>
+                <option value="12:00:00">noon</option>
+                <option value="12:30:00">12:30 PM</option>
+              <?php } ?>
+            <?php } ?>
+          <?php } ?>
+        </select>
       </td>
     </tr>
     <tr>
       <td>Booking End Time (24 hr):</td>
       <td>
         <input type="text" id="bookingEndDate" name="bookingEndDate" value="" class="formField_date">&nbsp;&nbsp;&nbsp;
-        <input type="text" id="bookingEndDateHour" name="bookingEndDateHour" value="" class="formField_time">&nbsp;&nbsp;:&nbsp;
-        <input type="text" id="bookingEndDateMinute" name="bookingEndDateMinute" value="" class="formField_time">
+        <select id="bookingEndTime" name="bookingEndTime">
+          <option value="00:00:00">midnight</option>
+          <option value="00:30:00">12:30 AM</option>
+          <?php for ($i = 0; $i < 2; $i++) { ?>
+            <?php for ($j = 1; $j <= 11; $j++) { ?>
+              <option value="<?= formatBookingTime($j, true, $i) ?>"><?= $j . ":00 " ?><?= ($i == 0) ? "AM" : "PM" ?></option>
+              <option value="<?= formatBookingTime($j, false, $i) ?>"><?= $j . ":30 " ?><?=($i == 0) ? "AM" : "PM" ?></option>
+
+              <?php if ($j == 11 && $i == 0) { ?>
+                <option value="12:00:00">noon</option>
+                <option value="12:30:00">12:30 PM</option>
+              <?php } ?>
+            <?php } ?>
+          <?php } ?>
+        </select>
       </td>
     </tr>
     <tr>
@@ -97,7 +140,7 @@
       <td colspan="2" align="right">
         <input type="hidden" name="action" value="add">
         <button type="button" onClick="window.location.href='list.php'">Cancel</button>
-        <button type="submit">Update</button>
+        <button type="submit">Add</button>
       </td>
     </tr>
   </form>

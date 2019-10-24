@@ -15,13 +15,11 @@
       $reformatedStartDate = str_replace("/", "-", $_POST['bookingStartDate']);
       $reformatedEndDate = str_replace("/", "-", $_POST['bookingEndDate']);
 
-      $bookingStartDateTime = new DateTime("{$reformatedStartDate} {$_POST['bookingStartDateHour']}:{$_POST['bookingStartDateMinute']}:00");
-      $bookingEndDateTime = new DateTime("{$reformatedEndDate} {$_POST['bookingEndDateHour']}:{$_POST['bookingEndDateMinute']}:00");
+      $bookingStartDateTime = new DateTime("{$reformatedStartDate} {$_POST['bookingStartTime']}");
+      $bookingEndDateTime = new DateTime("{$reformatedEndDate} {$_POST['bookingEndTime']}");
 
       $bookingStartTime = $bookingStartDateTime->format('Y-m-d H:i:s');
       $bookingEndTime = $bookingEndDateTime->format('Y-m-d H:i:s');
-
-      //echo $bookingStartTime . "<br/>" . $bookingEndTime;
 
       $query = $db->query("UPDATE BookingsCurrent SET UserID = $userid, VehicleID = $vehicleid, BookingStartTime = '$bookingStartTime', BookingEndTime = '$bookingEndTime', BookingTotal = '$bookingTotal' WHERE BookingID = $bookingid");
 
@@ -34,8 +32,8 @@
       $reformatedStartDate = str_replace("/", "-", $_POST['bookingStartDate']);
       $reformatedEndDate = str_replace("/", "-", $_POST['bookingEndDate']);
 
-      $bookingStartDateTime = new DateTime("{$reformatedStartDate} {$_POST['bookingStartDateHour']}:{$_POST['bookingStartDateMinute']}:00");
-      $bookingEndDateTime = new DateTime("{$reformatedEndDate} {$_POST['bookingEndDateHour']}:{$_POST['bookingEndDateMinute']}:00");
+      $bookingStartDateTime = new DateTime("{$reformatedStartDate} {$_POST['bookingStartTime']}");
+      $bookingEndDateTime = new DateTime("{$reformatedEndDate} {$_POST['bookingEndTime']}");
 
       $bookingStartTime = $bookingStartDateTime->format('Y-m-d H:i:s');
       $bookingEndTime = $bookingEndDateTime->format('Y-m-d H:i:s');
