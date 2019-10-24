@@ -3,7 +3,7 @@ function getVehicleTypeNames() {
     type: "GET",
     url: "/admin/bookings/vehicleSearch.php?action=getVehicleTypeNames",
     success: function(data) {
-      var opts = $.parseJSON(data);
+      var opts = JSON.parse(data);
 
       resetDropdown(1);
       resetDropdown(2);
@@ -21,7 +21,7 @@ function getVehicleModel(value) {
     type: "GET",
     url: "/admin/bookings/vehicleSearch.php?action=getVehicleModelByType&vehicleTypeName=" + value,
     success: function(data) {
-      var opts = $.parseJSON(data);
+      var opts = JSON.parse(data);
 
       resetDropdown(2);
       resetDropdown(3);
@@ -30,6 +30,9 @@ function getVehicleModel(value) {
         var split = d.split("|");
         $('#vehicleModel').append('<option value="' + split[1] + '">' + split[0] + ' ' + split[1] + '</option>');
       });
+
+      var split = opts[0].split("|");
+      //$("#booking_fee_div").html("[" + split[2] + "]");
     }
   });
 }
@@ -39,7 +42,7 @@ function getVehicleAddress(value) {
     type: "GET",
     url: "/admin/bookings/vehicleSearch.php?action=getVehicleAddress&vehicleModel=" + value,
     success: function(data) {
-      var opts = $.parseJSON(data);
+      var opts = JSON.parse(data);
 
       resetDropdown(3);
 

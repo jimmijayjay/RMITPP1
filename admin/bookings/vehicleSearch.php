@@ -19,7 +19,7 @@
 
     $result = array();
 
-    if ($stmt = mysqli_prepare($db, "SELECT VehicleMake, VehicleModel FROM VehicleDetails WHERE VehicleTypeName = ?")) {
+    if ($stmt = mysqli_prepare($db, "SELECT v.VehicleMake, v.VehicleModel, br.BookingFee FROM VehicleDetails v INNER JOIN BookingRates br ON v.VehicleTypeName = br.VehicleTypeName WHERE v.VehicleTypeName = ?")) {
 
       /* bind parameters for markers */
       mysqli_stmt_bind_param($stmt, "s", $_GET['vehicleTypeName']);
@@ -32,7 +32,7 @@
 
       /* fetch value */
       while ($row = mysqli_fetch_assoc($vehicleModels)) {
-        $value = $row['VehicleMake'] . '|' . $row['VehicleModel'];
+        $value = $row['VehicleMake'] . '|' . $row['VehicleModel'] . '|' . $row['BookingFee'];
         array_push($result, $value);
       }
     }

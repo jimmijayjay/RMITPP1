@@ -1,10 +1,10 @@
 <?php
   include_once($_SERVER["DOCUMENT_ROOT"] . '/admin/includes/header.php');
 
-  $vehicleid = $vehicleLatitude = $vehicleLongitude = 0;
+  $vehicleid = $vehicleLatitude = $vehicleLongitude = $bookingFee = $bookingPenaltyRate = $vehicleTypeID = 0;
   $vehicleTypeName = $vehicleMake = $vehicleModel = $vehicleAvailability = $vehicleSuburb = $vehicleAddress = "";
 
-  if ($stmt = mysqli_prepare($db, "SELECT VehicleID, VehicleMake, VehicleModel, VehicleTypeName, VehicleAvailability, VehicleSuburb, VehicleAddress, VehicleLatitude, VehicleLongitude FROM VehicleDetails WHERE VehicleID = ?")) {
+  if ($stmt = mysqli_prepare($db, "SELECT v.VehicleID, v.VehicleMake, v.VehicleModel, v.VehicleTypeName, v.VehicleAvailability, v.VehicleSuburb, v.VehicleAddress, v.VehicleLatitude, v.VehicleLongitude, br.BookingFee, br.BookingPenaltyRate, br.VehicleTypeID FROM VehicleDetails v INNER JOIN BookingRates br ON v.VehicleTypeName = br.VehicleTypeName WHERE v.VehicleID = ?")) {
 
     /* bind parameters for markers */
     mysqli_stmt_bind_param($stmt, "i", $_GET['VehicleID']);
@@ -13,7 +13,7 @@
     mysqli_stmt_execute($stmt);
 
     /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $vehicleid, $vehicleMake, $vehicleModel, $vehicleTypeName, $vehicleAvailability, $vehicleSuburb, $vehicleAddress, $vehicleLatitude, $vehicleLongitude);
+    mysqli_stmt_bind_result($stmt, $vehicleid, $vehicleMake, $vehicleModel, $vehicleTypeName, $vehicleAvailability, $vehicleSuburb, $vehicleAddress, $vehicleLatitude, $vehicleLongitude, $bookingFee, $bookingPenaltyRate, $vehicleTypeID);
 
     /* fetch value */
     mysqli_stmt_fetch($stmt);
@@ -52,6 +52,22 @@
       error += "You must enter the address where the vehicle is located.<br/>";
     }
 
+    if ($("#bookingFee").val() == 0 || isNaN($("#bookingFee").val())) {
+      error += "You must enter a booking fee for this vehicle.<br/>";
+    }
+
+    if ($("#bookingPenaltyRate").val() == 0 || isNaN($("#bookingPenaltyRate").val())) {
+      error += "You must enter a booking penalty rate for this vehicle.<br/>";
+    }
+
+    if ($("#vehicleLatitude").val() == 0 || isNaN($("#vehicleLatitude").val())) {
+      error += "You must enter the latitude of this address.<br/>";
+    }
+
+    if ($("#vehicleLongitude").val() == 0 || isNaN($("#vehicleLongitude").val())) {
+      error += "You must enter the longitude of this address.<br/>";
+    }
+
     if (error != "") {
       $("#errorDiv").html(error);
       return false;
@@ -86,6 +102,14 @@
       <td><input type="text" id="vehicleAddress" name="vehicleAddress" value="<?= $vehicleAddress ?>" class="formField_text_large"></td>
     </tr>
     <tr>
+      <td>Booking Fee:</td>
+      <td><input type="text" id="bookingFee" name="bookingFee" value="<?= $bookingFee ?>" class="formField_text_large"></td>
+    </tr>
+    <tr>
+      <td>Booking Penalty Rate:</td>
+      <td><input type="text" id="bookingPenaltyRate" name="bookingPenaltyRate" value="<?= $bookingPenaltyRate ?>" class="formField_text_large"></td>
+    </tr>
+    <tr>
       <td>Vehicle Latitude:</td>
       <td><input type="text" id="vehicleLatitude" name="vehicleLatitude" value="<?= $vehicleLatitude ?>" class="formField_text_large"></td>
     </tr>
@@ -95,6 +119,7 @@
     </tr>
     <tr>
       <td colspan="2" align="right">
+        <input type="hidden" name="VehicleTypeID" value="<?= $vehicleTypeID ?>">
         <input type="hidden" name="VehicleID" value="<?= $vehicleid ?>">
         <input type="hidden" name="action" value="edit">
         <button type="button" onClick="window.location.href='list.php'">Cancel</button>

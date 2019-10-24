@@ -159,3 +159,7 @@ div#errorDiv {
   margin-left: 30px;
   font-size: 14pt;
 }
+
+#booking_fee_div {
+  display: inline;
+}

@@ -32,6 +32,22 @@
       error += "You must enter the address where the vehicle is located.<br/>";
     }
 
+    if ($("#bookingFee").val() == 0 || isNaN($("#bookingFee").val())) {
+      error += "You must enter a booking fee for this vehicle.<br/>";
+    }
+
+    if ($("#bookingPenaltyRate").val() == 0 || isNaN($("#bookingPenaltyRate").val())) {
+      error += "You must enter a booking penalty rate for this vehicle.<br/>";
+    }
+
+    if ($("#vehicleLatitude").val() == 0 || isNaN($("#vehicleLatitude").val())) {
+      error += "You must enter the latitude of this address.<br/>";
+    }
+
+    if ($("#vehicleLongitude").val() == 0 || isNaN($("#vehicleLongitude").val())) {
+      error += "You must enter the longitude of this address.<br/>";
+    }
+
     if (error != "") {
       $("#errorDiv").html(error);
       return false;
@@ -66,12 +82,20 @@
       <td><input type="text" id="vehicleAddress" name="vehicleAddress" class="formField_text_large"></td>
     </tr>
     <tr>
+      <td>Booking Fee:</td>
+      <td><input type="text" id="bookingFee" name="bookingFee" class="formField_text_large" value="0"></td>
+    </tr>
+    <tr>
+      <td>Booking Penalty Rate:</td>
+      <td><input type="text" id="bookingPenaltyRate" name="bookingPenaltyRate" class="formField_text_large" value="0"></td>
+    </tr>
+    <tr>
       <td>Vehicle Latitude:</td>
-      <td><input type="text" id="vehicleLatitude" name="vehicleLatitude" class="formField_text_large"></td>
+      <td><input type="text" id="vehicleLatitude" name="vehicleLatitude" class="formField_text_large" value="0"></td>
     </tr>
     <tr>
       <td>Vehicle Longitude:</td>
-      <td><input type="text" id="vehicleLongitude" name="vehicleLongitude" class="formField_text_large"></td>
+      <td><input type="text" id="vehicleLongitude" name="vehicleLongitude" class="formField_text_large" value="0"></td>
     </tr>
     <tr>
       <td colspan="2" align="right">

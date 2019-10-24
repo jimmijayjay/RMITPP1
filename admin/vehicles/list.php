@@ -1,7 +1,7 @@
 <?php
   include_once($_SERVER["DOCUMENT_ROOT"] . '/admin/includes/header.php');
 
-  $sql = "SELECT VehicleID, VehicleMake, VehicleModel, VehicleTypeName, VehicleAvailability, VehicleSuburb, VehicleAddress, VehicleLatitude, VehicleLongitude, Active FROM VehicleDetails WHERE Active = 1 ORDER BY VehicleTypeName";
+  $sql = "SELECT v.VehicleID, v.VehicleMake, v.VehicleModel, v.VehicleTypeName, v.VehicleAvailability, v.VehicleSuburb, v.VehicleAddress, v.VehicleLatitude, v.VehicleLongitude, v.Active, br.BookingFee, br.BookingPenaltyRate FROM VehicleDetails v INNER JOIN BookingRates br ON v.VehicleTypeName = br.VehicleTypeName WHERE v.Active = 1 ORDER BY v.VehicleTypeName";
 ?>
 
 <script>
@@ -35,10 +35,11 @@
 </div>
 <table class="list_table">
   <tr>
-    <th>Vehicle Type</th>
-    <th>Vehicle Make</th>
-    <th>Vehicle Model</th>
-    <th>Vehicle Address</th>
+    <th>Vehicle&nbsp;Type</th>
+    <th>Vehicle</th>
+    <th>Vehicle&nbsp;Address</th>
+    <th>Booking&nbsp;Fee</th>
+    <th>Booking&nbsp;Penalty&nbsp;Rate</th>
     <th>Actions</th>
   </tr>
   <?php
@@ -48,12 +49,12 @@
   ?>
     <tr>
       <td><?= $vehicle['VehicleTypeName'] ?></td>
-      <td><?= $vehicle['VehicleMake'] ?></td>
-      <td><?= $vehicle['VehicleModel'] ?></td>
+      <td><?= $vehicle['VehicleMake'] . ' ' . $vehicle['VehicleModel'] ?></td>
       <td><?= $vehicle['VehicleAddress'] ?></td>
+      <td><?= $vehicle['BookingFee'] ?></td>
+      <td><?= $vehicle['BookingPenaltyRate'] ?></td>
       <td>
-        <a href="edit.php?VehicleID=<?= $vehicle['VehicleID']?>">Edit</a>&nbsp;|&nbsp;
-        <a href="javascript: deleteVehicle(<?= $vehicle['VehicleID'] ?>)">Delete</a>
+        <a href="edit.php?VehicleID=<?= $vehicle['VehicleID']?>">Edit</a>&nbsp;|&nbsp;<a href="javascript: deleteVehicle(<?= $vehicle['VehicleID'] ?>)">Delete</a>
       </td>
     </tr>
   <?php

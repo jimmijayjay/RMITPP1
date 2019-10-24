@@ -89,7 +89,9 @@
     </tr>
     <tr>
       <td>Booking Total:</td>
-      <td>$&nbsp;<input type="text" id="bookingTotal" name="bookingTotal" value="" class="formField_text_med"></td>
+      <td>
+        $&nbsp;<input type="text" id="bookingTotal" name="bookingTotal" value="" class="formField_text_med">&nbsp;<p id="booking_fee_div"></p>
+      </td>
     </tr>
     <tr>
       <td colspan="2" align="right">
