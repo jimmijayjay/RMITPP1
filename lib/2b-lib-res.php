@@ -94,7 +94,7 @@ class Res {
 
 
   /* [DATE RANGE BOOKING] */
-  function bookRange ($name, $email, $tel, $start, $end, $notes="", $vehicle_id) {
+  function bookRangeValidate ($name, $email, $tel, $start, $end, $notes="", $vehicle_id) {
   // bookRange() : reserve for the date range
 
     // Check if customer already booked within the date range
@@ -106,13 +106,53 @@ class Res {
       return false;
     }
     
-    //$vehicle_id = 6;
+    //Check whether the user has logined
+//    session_start();
+//    if ( !isset($_SESSION["carbuddy"]) || (isset($_SESSION["carbuddy"]) && !$_SESSION["carbuddy"]->isLoggedIn())) {
+//        return 2;
+//    }
+   if (session_status() == PHP_SESSION_NONE) {
+        session_start();
+    }
+    $_SESSION['start'] = $start;
+    $_SESSION['end'] = $end;
+    $_SESSION['vehicle_id'] = $vehicle_id;
+
+    return 1;
+
     // Process reservation
-    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
-    $cond = [$start, $end, $vehicle_id];
-    return $this->exec($sql, $cond);
+//    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID` ) VALUES (?,?,?)";
+//    $cond = [$start, $end, $vehicle_id];
+//    echo "This code is running";
+//    return $this->exec($sql, $cond);
+    //return 2;
+    
   }
 
+  
+   function bookRange ($name, $email, $tel, $start, $end, $notes="", $vehicle_id, $FeePerHour, $Hours, $TotalFee){
+  // bookRange() : reserve for the date range
+
+    // Check if customer already booked within the date range
+    $sql = "SELECT * FROM `BookingsCurrent` WHERE (((`BookingStartTime` BETWEEN ? AND ?) OR (`BookingEndTime` BETWEEN ? AND ?)) AND `VehicleID` = ?)";
+    $cond = [$start, $end, $start, $end, $vehicle_id];
+    $check = $this->fetch($sql, $cond); 
+//    if (count($check)>0) {
+//      $this->error = "This car is not available for the whole period between " . $start . " and " . $end;
+//      return false;
+//    }
+    
+    // Process reservation
+    $sql = "INSERT INTO `BookingsCurrent` (`BookingStartTime`, `BookingEndTime`, `VehicleID`, `FeePerHour`, `Hours`, `BookingTotal` ) VALUES (?,?,?,?,?,?)";
+    $cond = [$start, $end, $vehicle_id, $FeePerHour, $Hours, $TotalFee];
+    $reult = $this->exec($sql, $cond);
+    if($reult){
+        return True;
+    }
+    
+    return false;
+    
+  }
   /* [GET RESERVATION] */
   // @TODO - There are 101 ways to get/search for the reservations
   // This is a simple example that will get all reservations within a selected date range

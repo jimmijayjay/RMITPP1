@@ -4,17 +4,15 @@ require __DIR__ . DIRECTORY_SEPARATOR . "lib" . DIRECTORY_SEPARATOR . "2a-config
 require PATH_LIB . "2b-lib-res.php";
 $reslib = new Res();
 
-/* ANTI-SPAM MEASURE YOU CAN CONSIDER
- * ONLY ALLOW REGISTERED USERS TO BOOK
- * YOU CAN DO SOMETHING LIKE THIS ->
-session_start();
-if (!is_array($_SESSION['user'])) {
-  die(json_encode([
-    "status" => 0,
-    "message" => "You must be signed in first"
-  ]));
-}
-*/
+//Check whether the user has logined
+//session_start();
+// if ( !isset($_SESSION["carbuddy"]) || (isset($_SESSION["carbuddy"]) && !$_SESSION["carbuddy"]->isLoggedIn())) {
+//  die(json_encode([
+//    "status" => 0,
+//    "message" => "You must be signed in first"
+//  ]));
+//}
+
 
 // HANDLE AJAX REQUEST
 if ($_POST['req']) { switch ($_POST['req']) {
@@ -250,7 +248,7 @@ if ($_POST['req']) { switch ($_POST['req']) {
     // Save reservation to database
     $startDateTime = $_POST['start']." ".$_POST['slot_start'].":00";
     $endDateTime = $_POST['end']." ".$_POST['slot_end'].":00";
-    $pass = $reslib->bookRange(
+    $pass = $reslib->bookRangeValidate(
       $_POST['name'], $_POST['email'], $_POST['tel'], $startDateTime, $endDateTime, 
       $_POST['notes'] ? $_POST['notes'] : "",  $_POST['vehicle_id']
     );
@@ -266,9 +264,18 @@ if ($_POST['req']) { switch ($_POST['req']) {
     */
     
     // Server response
-    echo json_encode([
-      "status" => $pass ? 1 : 0,
-      "message" => $pass ? "OK" : $reslib->error
-    ]);
-    break;
+    if($pass==2){  
+      echo json_encode([     
+        "status" => 2,
+        "message" => "User has not login"
+      ]);
+      break;   
+    }
+      echo json_encode([     
+        "status" => $pass ? 1 : 0,
+        "message" => $pass ? "OK" : $reslib->error
+      ]);
+      break;
+    
+
 }}
