@@ -33,17 +33,14 @@
         $check = $reslib->bookRangeValidate("", "", "", $start, $end, "",  $vehicle_id);
         if(!$check){
            Redirect::to('car-alreay-booked.php');
-           echo "If condition (check) is running";
-        }else{
-            echo "If (Check) is not running";
         }
         
         $pass = $reslib->bookRange(
         "", "", "", $start, $end, 
-        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee, $FeePerHour, $Hours, $TotalFee);       
+        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee);       
             
-        if($pass){
-            Redirect::to('3d-thank-you.php');
+        if($pass){    
+                  Redirect::to('3d-thank-you.php');
         }
     }
 
