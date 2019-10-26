@@ -111,9 +111,9 @@ class Res {
 //    if ( !isset($_SESSION["carbuddy"]) || (isset($_SESSION["carbuddy"]) && !$_SESSION["carbuddy"]->isLoggedIn())) {
 //        return 2;
 //    }
-    if(!session_start()){
+   if (session_status() == PHP_SESSION_NONE) {
         session_start();
-    };
+    }
     $_SESSION['start'] = $start;
     $_SESSION['end'] = $end;
     $_SESSION['vehicle_id'] = $vehicle_id;
