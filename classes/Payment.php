@@ -20,7 +20,6 @@ class Payment
     $this->_db = DB::getInstance();
     $this->_sendMail = Email::getInstance();
 
-    $this->_sessionName = Config::get('sessions/session_name');
 
   }
 
@@ -39,7 +38,6 @@ class Payment
     $this->PostCode = $PostCode;
     
 
-    Session::put($this->_sessionName, $this);
   }
   
      public function calHours($start, $end){
