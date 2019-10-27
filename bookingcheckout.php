@@ -1,4 +1,6 @@
 <?php
+    include_once 'tools/sendemail.php';
+
     if (session_status() == PHP_SESSION_NONE) {
         session_start();
     }
@@ -40,7 +42,30 @@
         "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee);       
             
         if($pass){    
-                  Redirect::to('3d-thank-you.php');
+            //send a confirmation email
+            $email =     $_SESSION['car_buddy_email'];
+            $firstName = $_SESSION['car_buddy_firstname'];
+            $subject = "Car Buddy Booking Confirmation";
+            
+            $emailMessage = '
+
+            Hi '.$firstName.',
+
+            Your booking details are:
+
+            Start time: '.$start.'
+            End time:'.$end.'
+            Fer Per Hour:$'.$FeePerHour.'
+            Total Hours:'.$Hours.'
+            Total Fee:$'.$TotalFee.'    
+
+            Kind Regards,
+            Car Buddy Team
+            ';
+
+            sendEmail($subject, $emailMessage, $email);
+            
+            Redirect::to('3d-thank-you.php');
         }
     }
 
