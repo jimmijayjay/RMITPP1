@@ -134,7 +134,7 @@
     <tr>
       <td>Booking Total:</td>
       <td>
-        $&nbsp;<input type="text" id="bookingTotal" name="bookingTotal" value="" class="formField_text_med">&nbsp;<p id="booking_fee_div"></p>
+        $&nbsp;<input type="text" id="bookingTotal" name="bookingTotal" value="" class="formField_text_med">&nbsp;<button type="button" onClick="calculateBookingFee()">Calculate</button>
       </td>
     </tr>
     <tr>

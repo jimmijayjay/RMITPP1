@@ -1,13 +1,14 @@
 <?php
   include_once($_SERVER["DOCUMENT_ROOT"] . '/admin/includes/header.php');
 
-  $bookingid = 0;
-  $vehicleid = $bookingDate = $bookingStartTime = $bookingEndTime = $bookingTotal = $userid = "";
+  $userid = $vehicleid = $bookingid = $selectedBookingFee = 0;
+  $firstname = $lastname = $bookingDate = $bookingStartTime = $bookingEndTime = $bookingTotal = "";
+  $selectedVehicleTypeName = $vehicleMake = $selectedVehicleModel = "";
 
   $users = mysqli_query($db, "SELECT UserID, FirstName, LastName FROM Users WHERE UserTypeID = 2 AND Active = 1 ORDER BY LastName");
   $getAllVehicleTypes = mysqli_query($db, "SELECT VehicleTypeName FROM VehicleDetails GROUP BY VehicleTypeName");
 
-  if ($stmt = mysqli_prepare($db, "SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, u.FirstName, u.LastName, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN Users u ON b.UserID = u.UserID INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.BookingID = ?")) {
+  if ($stmt = mysqli_prepare($db, "SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, u.FirstName, u.LastName, v.VehicleTypeName, v.VehicleMake, v.VehicleModel, br.BookingFee FROM BookingsCurrent b INNER JOIN Users u ON b.UserID = u.UserID INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID INNER JOIN BookingRates br ON v.VehicleTypeName = br.VehicleTypeName WHERE b.BookingID = ?")) {
 
     /* bind parameters for markers */
     mysqli_stmt_bind_param($stmt, "i", $_GET['BookingID']);
@@ -19,7 +20,7 @@
     mysqli_stmt_store_result($stmt);
 
     /* bind result variables */
-    mysqli_stmt_bind_result($stmt, $bookingid, $vehicleid, $bookingTotal, $bookingDate, $bookingStartTime, $bookingEndTime, $userid, $firstname, $lastname, $selectedVehicleTypeName, $vehicleMake, $selectedVehicleModel);
+    mysqli_stmt_bind_result($stmt, $bookingid, $vehicleid, $bookingTotal, $bookingDate, $bookingStartTime, $bookingEndTime, $userid, $firstname, $lastname, $selectedVehicleTypeName, $vehicleMake, $selectedVehicleModel, $selectedBookingFee);
 
     /* fetch value */
     mysqli_stmt_fetch($stmt);
@@ -63,6 +64,8 @@
 
 <script src="/admin/js/bookingForm.js"></script>
 <script>
+  SELECTED_BOOKING_FEE = <?= $selectedBookingFee ?>;
+
   var bookingStartDate = "<?= $bookingStartDateTime->format('d/m/Y') ?>";
   var bookingEndDate = "<?= $bookingEndDateTime->format('d/m/Y') ?>";
 
@@ -194,7 +197,9 @@
     </tr>
     <tr>
       <td>Booking Total:</td>
-      <td>$&nbsp;<input type="text" id="bookingTotal" name="bookingTotal" value="<?= $bookingTotal ?>" class="formField_text_med"></td>
+      <td>
+        $&nbsp;<input type="text" id="bookingTotal" name="bookingTotal" value="<?= $bookingTotal ?>" class="formField_text_med">&nbsp;<button type="button" onClick="calculateBookingFee()">Calculate</button>
+      </td>
     </tr>
     <tr>
       <td colspan="2" align="right">

@@ -1,3 +1,5 @@
+var SELECTED_BOOKING_FEE = 0; // Note: This is a global variable that is referenced in the js script
+
 function getVehicleTypeNames() {
   $.ajax({
     type: "GET",
@@ -32,7 +34,9 @@ function getVehicleModel(value) {
       });
 
       var split = opts[0].split("|");
-      //$("#booking_fee_div").html("[" + split[2] + "]");
+
+      // Set the global booking fee
+      SELECTED_BOOKING_FEE = parseInt(split[2]);
     }
   });
 }
@@ -124,4 +128,23 @@ function checkForm() {
   }
 
   return true;
+}
+
+function calculateBookingFee() {
+  // Split the date field to get to the values
+  var date1_split = $("#bookingStartDate").val().split("/");
+  var date2_split = $("#bookingEndDate").val().split("/");
+
+  // Split the time form field
+  var time1_split = $("#bookingStartTime").val().split(":");
+  var time2_split = $("#bookingEndTime").val().split(":");
+
+  // Create the JS date/time object from the splits above
+  var date1 = new Date(date1_split[2], parseInt(date1_split[1])-1, date1_split[0], time1_split[0], time1_split[1]);
+  var date2 = new Date(date2_split[2], parseInt(date2_split[1])-1, date2_split[0], time2_split[0], time2_split[1]);
+
+  // Now calculate the number of hours in between
+  var hours = Math.abs(date2 - date1) / 3600000;
+
+  $("#bookingTotal").val(hours * SELECTED_BOOKING_FEE);
 }

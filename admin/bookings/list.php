@@ -32,6 +32,7 @@
     ?>
   </p>
 <?php } ?>
+
 <div class="admin_section_title_div">
   <h1>All Bookings</h1>
   <a href="add.php" class="admin_add_link">Add Booking</a>
