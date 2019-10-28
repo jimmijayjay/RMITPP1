@@ -35,7 +35,7 @@
 </section>
 
 <div id="account_submenu">
-  <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>
+  <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>&nbsp;&nbsp;&nbsp;<a href="return.php">Return Car</a>
 </div>
 
 <section class="probootstrap-section">
@@ -64,18 +64,21 @@
           <?php
             } else {
               while ($booking = $bookings->fetch_assoc()) {
-                date_default_timezone_set('Australia/Melbourne');
-                $date = date('m/d/Y h:i:s a', time());
-                if ($booking["BookingStartTime"]<$date && $booking["BookingStartTime"]!="returned"){?>
+                $bookingDate = date_create($booking['BookingDate']);
+                $bookingStartDate = date_create($booking['BookingStartTime']);
+                $bookingEndDate = date_create($booking['BookingEndTime']);
+                //date_default_timezone_set('Australia/Melbourne');
+                //$date = date('m/d/Y h:i:s a', time());
+                //if ( $booking["BookingStartTime"]!="returned"){?>
                 <tr>
-                    <td><?= $booking["BookingDate"] ?></td>
+                    <td><?= $bookingDate ?></td>
                     <td><?= $booking["VehicleMake"] . ' ' . $booking["VehicleModel"] ?></td>
                     <td><?= $booking["VehicleTypeName"] ?></td>
-                    <td><?= $booking["BookingEndTime"] ?></td>
+                    <td><?= date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
                     <td>$<?= $booking["BookingTotal"] ?></td>
-                    <td><?php echo '<a href="bookingReturn.php?BookingID= '.$booking["id"].'">';?>RETURN CAR</a></td>
+                    <td><?php echo '<a href="bookingReturn.php?BookingID='.$booking["id"].'">';?>RETURN CAR</a></td>
                 </tr>
-            <?php }
+            <?php 
               }
             }
           ?>
@@ -83,6 +86,10 @@
       </div>
     </div>
   </div>
+  <pre>
+  <?php echo print_r($booking) ; ?>
+  </pre>
+
 </section>
 
 
