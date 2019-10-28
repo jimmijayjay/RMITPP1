@@ -37,5 +37,6 @@
   );
 
   require_once 'sanitize.php';
+  include_once('loginCheck.php');
 
 ?>
