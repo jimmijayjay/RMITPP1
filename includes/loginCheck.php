@@ -2,7 +2,7 @@
 
   function pageIsRestricted() {
     $return = false;
-    $restrictedPages = array("booking2.php", "bookingcheckout.php");
+    $restrictedPages = array("booking.php", "booking2.php", "bookingWMap.php", "bookingcheckout.php");
 
     for ($i=0; $i < count($restrictedPages); $i++) {
       if (strpos($_SERVER['SCRIPT_NAME'], $restrictedPages[$i])) {
