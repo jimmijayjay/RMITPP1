@@ -397,7 +397,13 @@ div#account_submenu {
 
 h4#booking_history_title {
   font-weight: bold;
+  float: left;
   margin-left: 55px;
+}
+
+a#booking_history_download {
+  float: right;
+  margin-right: 55px;
 }
 
 table#booking_history_table, table#booking_history_table th, table#booking_history_table td {

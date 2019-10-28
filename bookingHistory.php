@@ -13,10 +13,6 @@
   include_once('includes/header.php');
 ?>
 
-<!-- <section style="text-align: center;margin: 0 auto;">
-  <a href="user.php">Account Details</a>
-</section> -->
-
 <section class="probootstrap-cover">
  <div class="container">
    <div class="row probootstrap-vh-75 align-items-center text-left">
@@ -24,9 +20,10 @@
        <div class="probootstrap-text pt-5">
          <h1 class="probootstrap-heading text-white mb-4">Booking History</h1>
          <div class="probootstrap-subheading mb-5">
-           <p class="h4 font-weight-normal">View all previous and current bookings<br><br>
-           <!--This will allow you to log into our system and see when cars are available<br><br>
-           You will need to finish your membership application and be activated before you can book --></p>
+           <p class="h4 font-weight-normal">
+             View all previous and current bookings
+             <br/><br/>
+           </p>
          </div>
        </div>
      </div>
@@ -42,7 +39,7 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12">
-        <h4 id="booking_history_title">Booking History</h4>
+        <h4 id="booking_history_title">Booking History</h4>&nbsp;<a href="bookingHistoryPDF.php" target="_blank" id="booking_history_download"><img src="images/pdf_icon_16_x_16.png" width="16" height="16" id="pdf_icon">&nbsp;Download History</a>
         <table id="booking_history_table">
           <tr>
             <th>Date</th>
@@ -64,14 +61,17 @@
           <?php
             } else {
               while ($booking = $bookings->fetch_assoc()) {
+                $bookingDate = date_create($booking['BookingDate']);
+                $bookingStartDate = date_create($booking['BookingStartTime']);
+                $bookingEndDate = date_create($booking['BookingEndTime']);
           ?>
             <tr>
-              <td><?= $booking["BookingDate"] ?></td>
+              <td><?= date_format($bookingDate, "d M, Y") ?></td>
               <td><?= $booking["VehicleMake"] . ' ' . $booking["VehicleModel"] ?></td>
               <td><?= $booking["VehicleTypeName"] ?></td>
-              <td><?= $booking["BookingStartTime"] . ' - ' . $booking["BookingStartTime"] ?></td>
+              <td><?= date_format($bookingStartDate, "d M, Y (g:i A)") . ' - ' . date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
               <td>$<?= $booking["BookingTotal"] ?></td>
-              <td><a href="bookingHistoryPDF.php" target="_blank"><img src="images/pdf_icon_16_x_16.png" width="16" height="16" id="pdf_icon">&nbsp;PDF</a></td>
+              <td><a href="bookingInvoicePDF.php?bookingid=<?= $booking['BookingID'] ?>" target="_blank">Invoice</a></td>
             </tr>
           <?php
               }
@@ -82,28 +82,5 @@
     </div>
   </div>
 </section>
-
-<!-- <table style="width:90%;margin: 0 auto;">
-<tr class="bookingHistoryTableHeaders">
-<th>Date</th>
-<th>Vehicle Type</th>
-<th>Vehicle Model</th>
-<th>Booking Duration</th>
-<th>Pick Up Location</th>
-<th>Drop Off Location</th>
-<th>Booking Fee</th>
-</tr>
-<tr class="bookingHistoryTableBody">
-<td>test</td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-<td></td>
-</tr>
-</table> -->
 
 <?php include_once('includes/footer.php'); ?>

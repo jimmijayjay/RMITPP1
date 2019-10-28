@@ -255,8 +255,6 @@ class User
     if ($userid) {
       if ($result = $this->_db->_conn->query("SELECT UserID, FirstName, LastName, Email, UserTypeID FROM Users WHERE Active = 1 AND UserID = $userid")) {
         return $result->fetch_array();
-
-        $result->close();
       }
     }
 
