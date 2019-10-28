@@ -83,6 +83,9 @@
     $("#bookingEndDate").datepicker("setDate", bookingEndDate);
 
     $("#bookingform").submit(function(event) {
+      // Auto calculate the booking fee
+      calculateBookingFee();
+
       if (!checkForm()) {
         event.preventDefault();
       }
