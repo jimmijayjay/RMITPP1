@@ -9,10 +9,11 @@ class Booking
           $BookingID,
           $VehicleID,
           $BookingType,
-          $ookingTotal,
+          $BookingTotal,
           $BookingDate,
           $BookingStartTime,
           $BookingEndTime,
+          $BookingReturned,
           $UserFirstName,
           $UserLastName,
           $UserEmail,
@@ -68,4 +69,9 @@ class Booking
     return $this->BookingEndTime;
   }
 
+  public function getBookingReturned()
+  {
+    return $this->BookingReturned;
+  }
   
+}
