@@ -32,7 +32,7 @@
 </section>
 
 <div id="account_submenu">
-  <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>
+  <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>&nbsp;&nbsp;&nbsp;<a href="return.php">Return Car</a>
 </div>
 
 <section class="probootstrap-section">
@@ -49,7 +49,7 @@
             <th>Booking&nbsp;Fee</th>
             <th>Download</th>
           </tr>
-          <?php if (empty($bookings)) { ?>
+          <?php if ($bookings->num_rows == 0) { ?>
           <tr>
             <td colspan="6" style="text-align: center; font-weight: bold;">
               <br/><br/>
