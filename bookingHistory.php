@@ -13,6 +13,16 @@
   include_once('includes/header.php');
 ?>
 
+<script>
+  function downloadInvoice(bookingid) {
+    window.open('bookingInvoicePDF.php?bookingid=' + bookingid, '_blank');
+  }
+
+  function downloadHistory(bookingid) {
+    window.open('bookingHistoryPDF.php?bookingid=' + bookingid, '_blank');
+  }
+</script>
+
 <section class="probootstrap-cover">
  <div class="container">
    <div class="row probootstrap-vh-75 align-items-center text-left">
@@ -32,55 +42,48 @@
 </section>
 
 <div id="account_submenu">
-  <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>&nbsp;&nbsp;&nbsp;<a href="return.php">Return Car</a>
+  <a href="user.php">Account Details</a>&nbsp;&nbsp;&nbsp;<a href="bookingHistory.php">Booking History</a>&nbsp;&nbsp;&nbsp;<a href="return.php">Return Car</a><br/><br/>
+  <button type="button" onclick="downloadHistory(<?= $booking['BookingID'] ?>)" class="btn_download">Download PDF</button>
 </div>
 
 <section class="probootstrap-section">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h4 id="booking_history_title">Booking History</h4>&nbsp;<a href="bookingHistoryPDF.php" target="_blank" id="booking_history_download"><img src="images/pdf_icon_16_x_16.png" width="16" height="16" id="pdf_icon">&nbsp;Download History</a>
-        <table id="booking_history_table">
-          <tr>
-            <th>Date</th>
-            <th>Vehicle</th>
-            <th>Vehicle&nbsp;Type</th>
-            <th>Booking&nbsp;Duration</th>
-            <th>Booking&nbsp;Fee</th>
-            <th>Download</th>
-          </tr>
-          <?php if ($bookings->num_rows == 0) { ?>
-          <tr>
-            <td colspan="6" style="text-align: center; font-weight: bold;">
-              <br/><br/>
-              No bookings found.
-              <br/><br/><br/>
-            </td>
-          </tr>
-
-          <?php
-            } else {
-              while ($booking = $bookings->fetch_assoc()) {
-                $bookingDate = date_create($booking['BookingDate']);
-                $bookingStartDate = date_create($booking['BookingStartTime']);
-                $bookingEndDate = date_create($booking['BookingEndTime']);
-          ?>
-            <tr>
-              <td><?= date_format($bookingDate, "d M, Y") ?></td>
-              <td><?= $booking["VehicleMake"] . ' ' . $booking["VehicleModel"] ?></td>
-              <td><?= $booking["VehicleTypeName"] ?></td>
-              <td><?= date_format($bookingStartDate, "d M, Y (g:i A)") . ' - ' . date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
-              <td>$<?= $booking["BookingTotal"] ?></td>
-              <td><a href="bookingInvoicePDF.php?bookingid=<?= $booking['BookingID'] ?>" target="_blank">Invoice</a></td>
+      <div class="col-md-12" style="text-align: center;">
+        <?php if ($bookings->num_rows == 0) { ?>
+          No Bookings Found.
+        <?php } else { ?>
+          <table style="width:90%;margin: 0 auto;">
+            <tr class="bookingHistoryTableHeaders">
+              <th>Date</th>
+              <th>Vehicle</th>
+              <th>Vehicle&nbsp;Type</th>
+              <th>Booking&nbsp;Duration</th>
+              <th>Booking&nbsp;Fee</th>
+              <th>Download</th>
             </tr>
-          <?php
-              }
-            }
-          ?>
-        </table>
+            <?php
+                while ($booking = $bookings->fetch_assoc()) {
+                  $bookingDate = date_create($booking['BookingDate']);
+                  $bookingStartDate = date_create($booking['BookingStartTime']);
+                  $bookingEndDate = date_create($booking['BookingEndTime']);
+            ?>
+              <tr class="bookingHistoryTableBody">
+                <td><?= date_format($bookingDate, "d M, Y") ?></td>
+                <td><?= $booking["VehicleMake"] . ' ' . $booking["VehicleModel"] ?></td>
+                <td><?= $booking["VehicleTypeName"] ?></td>
+                <td><?= date_format($bookingStartDate, "d M, Y (g:i A)") . ' - ' . date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
+                <td>$<?= $booking["BookingTotal"] ?></td>
+                <td><button type="button" onclick="downloadInvoice(<?= $booking['BookingID'] ?>)" class="btn_download">Invoice</button></td>
+              </tr>
+            <?php } ?>
+          </table>
+        <?php } ?>
       </div>
     </div>
   </div>
 </section>
+
+
 
 <?php include_once('includes/footer.php'); ?>

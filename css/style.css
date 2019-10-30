@@ -432,3 +432,7 @@ img#pdf_icon {
   position: relative;
   top: -2px;
 }
+
+button.btn_download {
+  cursor: pointer;
+}
