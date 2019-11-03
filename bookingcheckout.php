@@ -25,6 +25,14 @@
         $start = $_SESSION['start'];
         $end = $_SESSION['end'];
         $vehicle_id = $_SESSION['vehicle_id'];
+        $userID = $_SESSION['car_buddy_userid'];
+        $cardName = $_POST['cardname'];
+        $cardNumber = $_POST['cardnumber'];
+        $cardCVV = $_POST['cvv'];
+        $cardExpYear = $_POST['expyear'];
+        $cardExpMonth = $_POST['expmonth'];
+
+        
         $payment = new Payment();
         $Hours = $payment->calHours($start, $end);
         $FeePerHour = $payment->getFeePerHour($vehicle_id);
@@ -37,7 +45,14 @@
         
         $pass = $reslib->bookRange(
         "", "", "", $start, $end, 
-        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee);       
+        "",  $vehicle_id, $FeePerHour, $Hours, $TotalFee); 
+        
+        //record credit card details
+        if(!empty($_POST['savecard'])){
+                    $payment->recordCreditCardDetails($userID, $cardName, $cardNumber, $cardCVV, $cardExpYear, $cardExpMonth);
+        }
+        
+        
             
         if($pass){    
                   Redirect::to('3d-thank-you.php');
@@ -96,9 +111,9 @@
             <label for="cname">Name on Card</label>
             <input type="text" id="cardname" name="cardname" placeholder="John More Doe">
             <label for="ccnum">Credit card number</label>
-            <input type="text" id="ccnum" name="cardnumber" placeholder="1111-2222-3333-4444">
+            <input type="text" id="cardnumber" name="cardnumber" placeholder="1111-2222-3333-4444">
             <label for="expmonth">Exp Month</label>
-            <input type="text" id="expmonth" name="expmonth" placeholder="September">
+            <input type="text" id="expmonth" name="expmonth" placeholder="09">
 
             <div class="row">
               <div class="col-50">
@@ -114,7 +129,7 @@
 
         </div>
         <label>
-          <input type="checkbox" id="SaveCard" checked="checked" name="savecard"> Save Card Details for Next Booking
+          <input type="checkbox" id="savecard" checked="checked" name="savecard"> Save Card Details for Next Booking
         </label>
 
         <input type="submit" value="Continue to checkout" class="btn">
