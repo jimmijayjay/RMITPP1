@@ -41,44 +41,50 @@
 <section class="probootstrap-section">
   <div class="container">
     <div class="row">
-      <div class="col-md-12">
-        <h4 id="booking_history_title">Unreturned Cars</h4>
-        <table id="booking_history_table">
-          <tr>
-            <th>Booking Date</th>
-            <th>Vehicle</th>
-            <th>Vehicle&nbsp;Type</th>
-            <th>Due&nbsp;Back</th>
-            <th>Booking&nbsp;Fee</th>
-            <th>Download</th>
-          </tr>
-          <?php if (empty($bookings)) { ?>
-          <tr>
-            <td colspan="6" style="text-align: center; font-weight: bold;">
-              <br/><br/>
-              No bookings found.
-              <br/><br/><br/>
-            </td>
-          </tr>
+      <div class="col-md-12" style="text-align: center;">
+          <?php 
+          if($_SESSION['returned']=="success"){?>
+              <h1>Thank you, Car returned successfully!</h1><br>  
+          <?php 
+            $_SESSION['returned']="";
+          }
 
-          <?php
-            } else {
+          if ($bookings->num_rows == 0) { ?>
+          No Bookings Found.
+        <?php } else {?>
+          <!--<h4 id="booking_history_title">Unreturned Cars</h4>-->
+          <table style="width:90%;margin: 0 auto;">
+              <tr class="bookingHistoryTableHeaders">
+              <th>Booking Date</th>
+              <th>Vehicle</th>
+              <th>Vehicle&nbsp;Type</th>
+              <th>Due&nbsp;Back</th>
+              <th>Booking&nbsp;Fee</th>
+              <th>Return</th>
+            </tr>
+            <?php
               while ($booking = $bookings->fetch_assoc()) {
                 $bookingDate = date_create($booking['BookingDate']);
                 $bookingStartDate = date_create($booking['BookingStartTime']);
                 $bookingEndDate = date_create($booking['BookingEndTime']);
-                //date_default_timezone_set('Australia/Melbourne');
-                //$date = date('m/d/Y h:i:s a', time());
-                //if ( $booking["BookingStartTime"]!="returned"){?>
-                <tr>
-                    <td><?= $bookingDate ?></td>
-                    <td><?= $booking["VehicleMake"] . ' ' . $booking["VehicleModel"] ?></td>
-                    <td><?= $booking["VehicleTypeName"] ?></td>
-                    <td><?= date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
-                    <td>$<?= $booking["BookingTotal"] ?></td>
-                    <td><?php echo '<a href="bookingReturn.php?BookingID='.$booking["id"].'">';?>RETURN CAR</a></td>
-                </tr>
-            <?php 
+                date_default_timezone_set('Australia/Melbourne');
+                $date = date('Y-m-d h:i:s H', time());
+                $today = date("Y-m-d H:i:s");
+               
+                if ( ($booking["BookingReturned"] == NULL) && ($booking['BookingStartTime'] <= $today)){?>
+                  <tr class="bookingHistoryTableBody">
+                      <td><?= date_format($bookingDate, "d M, Y") ?></td>
+                      <td><?= $booking["VehicleMake"] . ' ' . $booking["VehicleModel"] ?></td>
+                      <td><?= $booking["VehicleTypeName"] ?></td>
+                      <td><?= date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
+                      <td>$<?= $booking["BookingTotal"] ?></td>
+                      <td><?php echo '<a href="bookingReturn.php?BookingID='.$booking["BookingID"].'"';
+                        ?> onclick="return confirm('Are you sure want to return this car?');"<?php
+                        echo '">';?>RETURN CAR</a></td>
+                  </tr>
+                  <?php
+                }
+               
               }
             }
           ?>
@@ -86,9 +92,6 @@
       </div>
     </div>
   </div>
-  <pre>
-  <?php echo print_r($booking) ; ?>
-  </pre>
 
 </section>
 
