@@ -21,6 +21,7 @@
         <li class="nav-item"><a href="about.php" class="nav-link">About</a></li>
         <li class="nav-item"><a href="findCars.php" class="nav-link">Find Cars</a></li>
         <li class="nav-item"><a href="bookingWMap.php" class="nav-link">Make a Booking</a></li>
+        <li class="nav-item"><a href="UserManual.php" class="nav-link">User Manual</a></li>
         <li class="nav-item"><a href="contact.php" class="nav-link">Contact</a></li>
         <?php if ($thisUser->isLoggedIn()) { ?>
           <li class="nav-item probootstrap-cta probootstrap-seperator"><a href="user.php" class="nav-link">Account</a></li>
