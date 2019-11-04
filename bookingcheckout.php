@@ -108,7 +108,7 @@
               </div>
             </div>
           </div>
-
+<br>
           <div class="col-50">
             <h3>Payment</h3>
             <label for="fname">Accepted Cards</label>
@@ -146,7 +146,7 @@
       </form>
     </div>
   </div>
-
+  <br>
   <div class="col-25">
     <div class="container">
       <h4>Booking Details
