@@ -23,7 +23,7 @@
   }
 
   function cancelBooking(bookingid) {
-    window.open('cancel.php?bookingid=' + bookingid);
+    window.location('cancel.php?bookingid=' + bookingid);
   }
 
 </script>
