@@ -13,7 +13,8 @@ class Payment
           $CardCVV,
           $Address,
           $State,
-          $PostCode;
+          $PostCode,
+          $_db;
   // Default constructor
   public function __construct($user = null)
   {
@@ -89,6 +90,23 @@ class Payment
     return $TotalFee;
         
   }
+  
+  public function recordCreditCardDetails($userID, $cardName, $cardNumber, $CVV, $cardExpYear, $cardExpMonth){
+      $mysqli = $this->_db->_conn;
+      $userID = mysqli_real_escape_string($mysqli, $userID);
+      $cardName = mysqli_real_escape_string($mysqli, $cardName);
+      $cardNumbe = mysqli_real_escape_string($mysqli, $cardNumbe);
+      $CVV = mysqli_real_escape_string($mysqli, $CVV);
+      $cardExpYear = mysqli_real_escape_string($mysqli, $cardExpYear);
+      $cardExpMonth = mysqli_real_escape_string($mysqli, $cardExpMonth);
+      $sql = "UPDATE Users SET CardName ='$cardName', CardNumber = '$cardNumber', CardCVV ='$CVV', CardExpYear='$cardExpYear', CardExpMonth = '$cardExpMonth' WHERE UserID ='$userID'"; 
+      $result = $mysqli->query($sql); 
+      if($result){
+          return true;
+      }          
+      $return = false;
+  }
+  
 
 
 
