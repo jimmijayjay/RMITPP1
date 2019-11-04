@@ -276,25 +276,37 @@ class User
     }
   }
 
+  //return car
   public function returnBookings($BookingID = null)
   {
     $return = false;
-    echo "<br>here";
     $mysqli = $this->_db->_conn;
     $today = date("Y-m-d H:i:s");
-    echo "<br>here";
     if ($updateResult = $mysqli->query("UPDATE BookingsCurrent SET BookingReturned = '$today' WHERE BookingID = $BookingID")) {
       $return = true;
       echo "<br>here yes";
     } else {
       echo $updateResult->error;
-      echo "<br>here no";
     }
-    echo "<br>here maybe";
     //$result->close();
     return $return;
   }
   
+  //cancel booking
+  public function cancelBookings($BookingID = null)
+  {
+    $return = false;
+    $mysqli = $this->_db->_conn;
+    if ($updateResult = $mysqli->query("DELETE FROM BookingsCurrent WHERE BookingID= $BookingID")) {
+      $return = true;
+      
+    } else {
+      echo $updateResult->error;
+    }
+    //$result->close();
+    return $return;
+  }
+
 
 
   // Get all bookings
