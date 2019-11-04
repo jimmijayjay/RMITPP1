@@ -17,6 +17,13 @@
   <a href="user.php">Account Details</a>
 </section> -->
 
+<script>
+  function returnCar(bookingid) {
+    window.location('bookingReturn.php?BookingID=' + bookingid);
+  }
+
+</script>
+
 <section class="probootstrap-cover">
  <div class="container">
    <div class="row probootstrap-vh-75 align-items-center text-left">
@@ -78,9 +85,8 @@
                       <td><?= $booking["VehicleTypeName"] ?></td>
                       <td><?= date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
                       <td>$<?= $booking["BookingTotal"] ?></td>
-                      <td><?php echo '<a href="bookingReturn.php?BookingID='.$booking["BookingID"].'"';
-                        ?> onclick="return confirm('Are you sure want to return this car?');"<?php
-                        echo '">';?>RETURN CAR</a></td>
+                      <td>
+                      <button type="button" onclick="return confirm('Are you sure want to return this car?'),returnCar(<?= $booking['BookingID'] ?>)" class="btn_download">Return</button></td>
                   </tr>
                   <?php
                 }

@@ -21,6 +21,11 @@
   function downloadHistory(bookingid) {
     window.open('bookingHistoryPDF.php?bookingid=' + bookingid, '_blank');
   }
+
+  function cancelBooking(bookingid) {
+    window.open('cancel.php?bookingid=' + bookingid);
+  }
+
 </script>
 
 <section class="probootstrap-cover">
@@ -50,6 +55,12 @@
   <div class="container">
     <div class="row">
       <div class="col-md-12" style="text-align: center;">
+        <?php if ($_SESSION["canceled"]=="success"){?>
+          <h3>Booking Canceled</h3> 
+          <?php 
+            $_SESSION["canceled"]="Fail"; 
+            ?>
+        <?php } ?>
         <?php if ($bookings->num_rows == 0) { ?>
           No Bookings Found.
         <?php } else { ?>
@@ -61,6 +72,7 @@
               <th>Booking&nbsp;Duration</th>
               <th>Booking&nbsp;Fee</th>
               <th>Download</th>
+              <th></th>
             </tr>
             <?php
                 while ($booking = $bookings->fetch_assoc()) {
@@ -75,6 +87,13 @@
                 <td><?= date_format($bookingStartDate, "d M, Y (g:i A)") . ' - ' . date_format($bookingEndDate, "d M, Y (g:i A)") ?></td>
                 <td>$<?= $booking["BookingTotal"] ?></td>
                 <td><button type="button" onclick="downloadInvoice(<?= $booking['BookingID'] ?>)" class="btn_download">Invoice</button></td>
+                <td>
+                <?php
+                $today = date("Y-m-d H:i:s");
+                  if($booking['BookingStartTime'] >= $today){?>
+                    <button type="button" onclick="return confirm('Are you sure want to return this car?'),cancelBooking(<?= $booking['BookingID'] ?>)" class="btn_download">Cancel</button>
+                  <?php } ?>
+                  </td>
               </tr>
             <?php } ?>
           </table>
