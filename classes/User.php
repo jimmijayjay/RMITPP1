@@ -1,5 +1,4 @@
 <?php
-
 class User
 {
 
@@ -12,7 +11,9 @@ class User
           $Email,
           $Hash,
           $ForgetPasswordHash,
-          $UserTypeID;
+          $UserTypeID,
+          $BookingID,
+          $today;
 
   // Default constructor
   public function __construct($user = null)
@@ -265,8 +266,8 @@ class User
   public function getAllBookings($userid = null)
   {
     $mysqli = $this->_db->_conn;
-
-    if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid AND b.Active = 1 ORDER BY b.BookingID DESC")) {
+ 
+    if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.BookingReturned, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid AND b.Active = 1 ORDER BY b.BookingID DESC")) {
 
       return $result;
 
@@ -274,6 +275,27 @@ class User
       return array();
     }
   }
+
+  public function returnBookings($BookingID = null)
+  {
+    $return = false;
+    echo "<br>here";
+    $mysqli = $this->_db->_conn;
+    $today = date("Y-m-d H:i:s");
+    echo "<br>here";
+    if ($updateResult = $mysqli->query("UPDATE BookingsCurrent SET BookingReturned = '$today' WHERE BookingID = $BookingID")) {
+      $return = true;
+      echo "<br>here yes";
+    } else {
+      echo $updateResult->error;
+      echo "<br>here no";
+    }
+    echo "<br>here maybe";
+    //$result->close();
+    return $return;
+  }
+  
+
 
   // Get all bookings
   public function getBookingsForPDF()
@@ -289,6 +311,7 @@ class User
 
     return $return;
   }
+
 
   // Logout
   public function logout()
