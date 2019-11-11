@@ -2,12 +2,20 @@
   include_once($_SERVER["DOCUMENT_ROOT"] . '/admin/includes/header.php');
 
   $sql = "SELECT b.BookingID, b.VehicleID, b.BookingType, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.UserID, v.VehicleMake, v.VehicleModel, v.VehicleTypeName, u.FirstName, u.LastName FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID INNER JOIN Users u ON b.UserID = u.UserID WHERE b.Active = 1 ORDER BY b.DateCreated DESC";
+
+  $today = date("Y-m-d H:i:s");
 ?>
 
 <script>
   function deleteBooking(bookingid) {
     if (confirm("Are you sure you want to delete this Booking?")) {
       window.location.href = "updateBooking.php?action=delete&BookingID=" + bookingid;
+    }
+  }
+
+  function cancelBooking(bookingid) {
+    if (confirm("Are you sure you want to cancel this Booking?")) {
+      window.location.href = "updateBooking.php?action=cancel&BookingID=" + bookingid;
     }
   }
 </script>
@@ -27,6 +35,9 @@
           break;
         case "delete":
           echo "Booking deleted successfully.";
+          break;
+        case "cancel":
+          echo "Booking cancelled successfully.";
           break;
       }
     ?>
@@ -62,6 +73,9 @@
       <td>
         <a href="edit.php?BookingID=<?= $booking['BookingID']?>">Edit</a>&nbsp;|&nbsp;
         <a href="javascript: deleteBooking(<?= $booking['BookingID'] ?>)">Delete</a>
+        <?php if($booking['BookingStartTime'] >= $today) { ?>
+          &nbsp;|&nbsp;<a href="javascript: cancelBooking(<?= $booking['BookingID'] ?>)">Cancel</a>
+        <?php } ?>
       </td>
     </tr>
   <?php

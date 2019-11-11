@@ -45,7 +45,7 @@
     $action = $_GET['action'];
     $bookingid = $_GET['BookingID'];
 
-    if ($action == "delete") {
+    if ($action == "delete" || $action == "cancel") {
       $query = $db->query("UPDATE BookingsCurrent SET Active = 0 WHERE BookingID = $bookingid");
     }
   }
