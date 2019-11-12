@@ -266,7 +266,7 @@ class User
   public function getAllBookings($userid = null)
   {
     $mysqli = $this->_db->_conn;
- 
+
     if ($result = $mysqli->query("SELECT b.BookingID, b.VehicleID, b.BookingTotal, b.BookingDate, b.BookingStartTime, b.BookingEndTime, b.BookingReturned, b.UserID, v.VehicleTypeName, v.VehicleMake, v.VehicleModel FROM BookingsCurrent b INNER JOIN VehicleDetails v ON b.VehicleID = v.VehicleID WHERE b.UserID = $userid AND b.Active = 1 ORDER BY b.BookingID DESC")) {
 
       return $result;
@@ -291,15 +291,15 @@ class User
     //$result->close();
     return $return;
   }
-  
+
   //cancel booking
   public function cancelBookings($BookingID = null)
   {
     $return = false;
     $mysqli = $this->_db->_conn;
-    if ($updateResult = $mysqli->query("DELETE FROM BookingsCurrent WHERE BookingID= $BookingID")) {
+    if ($updateResult = $mysqli->query("UPDATE BookingsCurrent SET Active = 0 WHERE BookingID = $BookingID")) {
       $return = true;
-      
+
     } else {
       echo $updateResult->error;
     }
