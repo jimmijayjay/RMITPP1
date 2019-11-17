@@ -23,11 +23,11 @@
 <h3>Sign Up / Register</h3>
 <p>Step 1: Open www.carbuddy.ga in my web browser</p>
 <img src=images/UserManualImages/WebsiteLink.png  width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%">
+<img src=images/UserManualImages/homePage.png width="60%">
 <p>Step 2: Select the ‘Sign Up’ to open the Car Buddy Registration Page</p>
 <img src=images/UserManualImages/SignUpNav.png width="60%"><br>
-<img src=images/UserManualImages/SignUpPage.png width="60%"><br>
-<img src=images/UserManualImages/SignUpInput.png width="60%">
+<img src=images/UserManualImages/signUpPage.png width="60%"><br>
+<img src=images/UserManualImages/signUpInput.png width="60%">
 <p>Step 3: Input the following account details to register a Car Buddy account:</p>
 <p> - First Name</p>
 <p> - Last Name</p>
@@ -35,9 +35,9 @@
 <p> - Password</p>
 <p> - Password Confirmation</p>
 <p>Once inputted, select the ‘Register’ button to create your account.</p>
-<img src=images/UserManualImages/SignUpInputtedText.png width="60%"><br>
+<img src=images/UserManualImages/signUpInputtedText.png width="60%"><br>
 <p>Step 4: Once the ‘Register’ button has been clicked, Car Buddy will proceed to send a confirmation email to the inputted email address where the user will need to verify the email address to complete the registration.</p>
-<img src=images/UserManualImages/SignUpVerification.png width="60%"><br>
+<img src=images/UserManualImages/signUpVerification.png width="60%"><br>
 
 
 <h3>Forgot Password</h3>
@@ -45,7 +45,7 @@
 <img src=images/UserManualImages/WebsiteLink.png width="60%">
 <p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
 <img src=images/UserManualImages/LogInNav.png width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
 <img src=images/UserManualImages/LogInInput.png width="60%"><br>
 <p>Step 3: Select the ‘Forget Password’ button</p>
 <img src=images/UserManualImages/ForgotPassword.png width="60%"><br>
@@ -58,10 +58,10 @@
 <h3>Logging In</h3>
 <p>Open www.carbuddy.ga in my web browser</p>
 <img src=images/UserManualImages/WebsiteLink.png width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
 <p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
 <img src=images/UserManualImages/LogInNav.png width="60%"><br>
-<img src=images/UserManualImages/LogInPage.png width="60%"><br>
+<img src=images/UserManualImages/LogINPage.png width="60%"><br>
 <img src=images/UserManualImages/LogInInput.png width="60%"><br>
 <p>Step 3: Input your Login Credentials</p>
 <img src=images/UserManualImages/LogInInputtedText.png width="60%"><br>
@@ -72,10 +72,10 @@
 <h3>Accessing the Account Page</h3>
 <p>Open www.carbuddy.ga in my web browser</p>
 <img src=images/UserManualImages/WebsiteLink.png width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
 <p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
 <img src=images/UserManualImages/LogInNav.png width="70%"><br>
-<img src=images/UserManualImages/LogInPage.png width="60%"><br>
+<img src=images/UserManualImages/LogINPage.png width="60%"><br>
 <img src=images/UserManualImages/LogInInput.png width="60%"><br>
 <p>Step 3: Input your Login Credentials</p>
 <img src=images/UserManualImages/LogInInputtedText.png width="60%"><br>
@@ -90,10 +90,10 @@
 <h3>Change Account Password</h3>
 <p>Open www.carbuddy.ga in my web browser</p>
 <img src=images/UserManualImages/WebsiteLink.png width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
 <p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
 <img src=images/UserManualImages/LogInNav.png width="70%"><br>
-<img src=images/UserManualImages/LogInPage.png width="60%"><br>
+<img src=images/UserManualImages/LogINPage.png width="60%"><br>
 <img src=images/UserManualImages/LogInInput.png width="60%"><br>
 <p>Step 3: Input your Login Credentials</p>
 <img src=images/UserManualImages/LogInInputtedText.png width="60%"><br>
@@ -110,10 +110,10 @@
 <h3>Create a Booking</h3>
 <p>Open www.carbuddy.ga in my web browser</p>
 <img src=images/UserManualImages/WebsiteLink.png width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
 <p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
 <img src=images/UserManualImages/LogInNav.png width="60%"><br>
-<img src=images/UserManualImages/LogInPage.png width="60%"><br>
+<img src=images/UserManualImages/LogINPage.png width="60%"><br>
 <img src=images/UserManualImages/LogInInput.png width="60%"><br>
 <p>Step 3: Input your Login Credentials</p>
 <img src=images/UserManualImages/LogInInputtedText.png width="60%"><br>
@@ -140,10 +140,10 @@
 <h3>Access your Booking History</h3>
 <p>Open www.carbuddy.ga in my web browser</p>
 <img src=images/UserManualImages/WebsiteLink.png width="60%"><br>
-<img src=images/UserManualImages/HomePage.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
 <p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
 <img src=images/UserManualImages/LogInNav.png width="60%"><br>
-<img src=images/UserManualImages/LogInPage.png width="60%" width="60%"><br>
+<img src=images/UserManualImages/LogINPage.png width="60%" width="60%"><br>
 <img src=images/UserManualImages/LogInInput.png width="60%" width="60%"><br>
 <p>Step 3: Input your Login Credentials</p>
 <img src=images/UserManualImages/LogInInputtedText.png width="60%"><br>
@@ -160,22 +160,27 @@
 <p>  </p>
 
 <h3>Return your Booked Car</h3>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
-<p>  </p>
+<p>Step 1: Open www.carbuddy.ga in my web browser</p>
+<img src=images/UserManualImages/WebsiteLink.png width="60%"><br>
+<img src=images/UserManualImages/homePage.png width="60%"><br>
+<p>Step 2: Select the ‘Log In’ to open the Car Buddy Login Page</p>
+<img src=images/UserManualImages/LogInNav.png width="60%"><br>
+<img src=images/UserManualImages/LogINPage.png width="60%" width="60%"><br>
+<img src=images/UserManualImages/LogInInput.png width="60%" width="60%"><br>
+<p>Step 3: Input your Login Credentials</p>
+<img src=images/UserManualImages/LogInInputtedText.png width="60%"><br>
+<p>Step 4: Select the ‘Login’ button when login credentials are filled in. After the login has been pressed, the system will sign the user in if the credentials are correct.</p>
+<img src=images/UserManualImages/LogInInputtedTextButton.png width="60%"><br>
+<p>Step 5: Select the ‘Account’ button to open the account page</p>
+<img src=images/UserManualImages/AccountNav.png width="60%"><br>
+<img src=images/UserManualImages/AccountPage.png width="60%"><br>
+<p>Step 6: Select the ‘Return Car’ link to access my Car Buddy Return Car section</p>
+<img src=images/UserManualImages/returnCarLink.png width="60%"><br>
+<p> Step 7: The system will present me with my current Car Buddy bookings with the as seen below: </p>
+<img src=images/UserManualImages/returnCarPage.png width="60%"><br>
+<p> Step 8: In order to return the booking vehicle, the user will need to choose which booked vehicle to return,</p>
+<p>simply click the ‘Return’ button to return the vehicle within the Car Buddy system, as seen below: </p>
+<img src=images/UserManualImages/returnCarFunction.png width="60%"><br>
 </div>
 
 </section>
