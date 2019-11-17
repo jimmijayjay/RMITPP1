@@ -19,7 +19,7 @@
 
 <script>
   function returnCar(bookingid) {
-    window.location('bookingReturn.php?BookingID=' + bookingid);
+    window.open('bookingReturn.php?BookingID=' + bookingid, '_self');
   }
 
 </script>
